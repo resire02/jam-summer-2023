@@ -51,7 +51,7 @@ public class ProgressionTracker : MonoBehaviour
         levelEnlightenment += points.en * milestoneScalar * choice;
         levelAbundance += points.a * milestoneScalar * choice;
 
-        Debug.Log($"{levelTechnology} {levelStability} {levelExploration} {levelEnlightenment} {levelAbundance}");
+        Debug.Log($"New Values: {levelTechnology} {levelStability} {levelExploration} {levelEnlightenment} {levelAbundance}");
 
         //  TODO: check if any values are negative (then lose)
     }

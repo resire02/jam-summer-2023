@@ -9,29 +9,30 @@ public class ProcessChoiceEvent : UnityEvent<ChoiceEvent, int>
 
 }
 
+/// Displays and calculates the result of the RandomEvent
 [RequireComponent(typeof(RandomEventHandler))]
 public class RandomEvent : MonoBehaviour
 {
-    public GameObject eventPanel;
+    public GameObject eventBar;
+    public ProcessChoiceEvent choiceEvent;
+
     private ChoiceEvent currentEvent;
     private RandomEventHandler handler;
-    public ProcessChoiceEvent choiceEvent;
+    private Animator animator;
 
     private void Start()
     {
         handler = GetComponent<RandomEventHandler>();
+        animator = eventBar.GetComponent<Animator>();
     }
 
+    //  draws a random event from the event pool
     public void DetermineEvent(Age age)
     {
-        ToggleEventPanel();
         currentEvent = RandomEventList.SelectRandomEvent(age);
-        Debug.Log(currentEvent.GetTitle());
-    }
-    
-    private void ToggleEventPanel()
-    {
-        eventPanel.transform.Translate(Vector3.up * 300);
+        animator.SetBool("EventBarVisible", true);
+
+        Debug.Log($"Event Called: {currentEvent.GetTitle()}");
     }
 
     //  used for button functionality
@@ -45,5 +46,6 @@ public class RandomEvent : MonoBehaviour
             choiceEvent.Invoke(currentEvent, -1);
 
         currentEvent = null;
+        animator.SetBool("EventBarVisible", false);
     }
 }

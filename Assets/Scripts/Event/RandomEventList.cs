@@ -29,6 +29,7 @@ public static class RandomEventList
         int index = Random.Range(0, list.Count - 1);
         ChoiceEvent choice = list[index];
         list.RemoveAt(index);
+        Debug.Log($"Length Modified: {list.Count}");
         return choice;
     }
 
@@ -45,9 +46,10 @@ public static class RandomEventList
         eventList[Age.Space] = new List<ChoiceEvent>();
         eventList[Age.Galactic] = new List<ChoiceEvent>();
         eventList[Age.Cosmic] = new List<ChoiceEvent>();
-        // eventList[Age.Singularity] = new List<ChoiceEvent>();
+        eventList[Age.Singularity] = new List<ChoiceEvent>();
 
         //  TODO: add all events here
-        eventList[Age.Prehistoric].Add(new ChoiceEvent("Humans dumb", "humans are dumb", (-10, -10, -10, -10, -10)));
+        // eventList[Age.Prehistoric].Add(new ChoiceEvent("title", "description", (0, 0, 0, 0, 0)));
+        
     }
 }

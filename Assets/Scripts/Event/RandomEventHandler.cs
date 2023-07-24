@@ -9,11 +9,12 @@ public class UpdateTextEvent : UnityEvent<float>
 
 }
 
+//  Handles when events occur
 public class RandomEventHandler : MonoBehaviour
 {
     //  probability is calculated as 1 in eventProb
     [SerializeField] private int eventProbability = 7;
-    [SerializeField] private float eventInterval = 10f;
+    [SerializeField] private float eventTriggerInterval = 10f;
     [SerializeField] private float gameSpeed = 2f;
     [SerializeField] private float startingYear = 0;
     
@@ -34,31 +35,33 @@ public class RandomEventHandler : MonoBehaviour
         if(eventIsOccurring) return;
 
         eventTimer += Time.deltaTime * gameSpeed;
-        eventTimer = Mathf.Clamp(eventTimer, 0, eventInterval);
+        eventTimer = Mathf.Clamp(eventTimer, 0, eventTriggerInterval);
 
-        if(eventTimer == eventInterval)
+        if(eventTimer == eventTriggerInterval)
         {
             eventTimer = 0f;
-            startingYear += eventInterval;
+            startingYear += eventTriggerInterval;
             updateTimeText.Invoke(startingYear);
             GambleEvent();
         }
     }
 
+    //  gambles on event chance
     public void GambleEvent()
     {
-        //  TODO: add a random chance for event to occur
         if(Random.Range(1, eventProbability) == 1)
         {
             eventIsOccurring = true;
+
+            //  TODO: make this accept Age argument
             randomEvent.DetermineEvent(Age.Prehistoric);
         }
     }
 
+    //  handles end of event (connected by button callback)
     public void OnEventEnd()
     {
         eventIsOccurring = false;
-        randomEvent = null;
     }
 
     public bool IsEventHappening() { return eventIsOccurring; }
