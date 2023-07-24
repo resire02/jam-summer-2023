@@ -54,4 +54,12 @@ public class RandomEventHandler : MonoBehaviour
             randomEvent.DetermineEvent(Age.Prehistoric);
         }
     }
+
+    public void OnEventEnd()
+    {
+        eventIsOccurring = false;
+        randomEvent = null;
+    }
+
+    public bool IsEventHappening() { return eventIsOccurring; }
 }

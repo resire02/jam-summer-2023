@@ -321,10 +321,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1629679642}
-        m_TargetAssemblyTypeName: ButtonFunctionality, Assembly-CSharp
-        m_MethodName: ButtonDeny
-        m_Mode: 1
+      - m_Target: {fileID: 1074221457}
+        m_TargetAssemblyTypeName: RandomEvent, Assembly-CSharp
+        m_MethodName: ProcessPlayerChoice
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1265,6 +1265,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventPanel: {fileID: 1291698191}
+  choiceEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1074221456}
+        m_TargetAssemblyTypeName: RandomEventHandler, Assembly-CSharp
+        m_MethodName: OnEventEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1074221453}
+        m_TargetAssemblyTypeName: ProgressionTracker, Assembly-CSharp
+        m_MethodName: AdjustProgression
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1134768867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,7 +1378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1147049592}
   m_Layer: 0
-  m_Name: GameEnviorment
+  m_Name: GameEnvironment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1457,14 +1484,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1629679642}
-        m_TargetAssemblyTypeName: ButtonFunctionality, Assembly-CSharp
-        m_MethodName: ButtonConfirm
-        m_Mode: 1
+      - m_Target: {fileID: 1074221457}
+        m_TargetAssemblyTypeName: RandomEvent, Assembly-CSharp
+        m_MethodName: ProcessPlayerChoice
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2051,7 +2078,6 @@ GameObject:
   - component: {fileID: 1629679641}
   - component: {fileID: 1629679640}
   - component: {fileID: 1629679639}
-  - component: {fileID: 1629679642}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2109,18 +2135,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1629679642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1629679638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4c24008f3dbf8647a3f7807b185a778, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1735988310
 GameObject:
   m_ObjectHideFlags: 0

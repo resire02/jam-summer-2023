@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//  Handles random selection of events
 public static class RandomEventList
 {
     private static Dictionary<Age,List<ChoiceEvent>> eventList = new Dictionary<Age,List<ChoiceEvent>>();
@@ -21,6 +22,7 @@ public static class RandomEventList
         return SelectRandomEventFromList(eventList[age]);
     }
 
+    //  selects a random event and removes it from the pool
     private static ChoiceEvent SelectRandomEventFromList(List<ChoiceEvent> list)
     {
         if(list.Count < 1) return DEFAULT;
@@ -32,7 +34,8 @@ public static class RandomEventList
 
     //  populates eventList with events
     private static void InitializeAllEvents()
-    { 
+    {
+        //  initalize all lists
         eventList[Age.Prehistoric] = new List<ChoiceEvent>();
         eventList[Age.Civilization] = new List<ChoiceEvent>();
         eventList[Age.Medieval] = new List<ChoiceEvent>();
