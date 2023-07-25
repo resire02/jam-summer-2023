@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 [System.Serializable]
 public class ProcessChoiceEvent : UnityEvent<ChoiceEvent, int> 
@@ -14,6 +15,8 @@ public class ProcessChoiceEvent : UnityEvent<ChoiceEvent, int>
 public class RandomEvent : MonoBehaviour
 {
     public GameObject eventBar;
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI description;
     public ProcessChoiceEvent choiceEvent;
 
     private ChoiceEvent currentEvent;
@@ -31,6 +34,8 @@ public class RandomEvent : MonoBehaviour
     {
         currentEvent = RandomEventList.SelectRandomEvent(age);
         animator.SetBool("EventBarVisible", true);
+        titleText.text = currentEvent.GetTitle();
+        description.text = currentEvent.GetDescription();
 
         Debug.Log($"Event Called: {currentEvent.GetTitle()}");
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 [System.Serializable]
 public class TextUpdateEvent : UnityEvent<float> {}
@@ -9,6 +10,8 @@ public class TextUpdateEvent : UnityEvent<float> {}
 //  Handles Core Game Logic
 public class ProgressionTracker : MonoBehaviour
 {
+    public TextMeshProUGUI statText;
+
     /// Main Parameters
     private float levelTechnology       = 0f;
     private float levelStability        = 0f;
@@ -41,6 +44,11 @@ public class ProgressionTracker : MonoBehaviour
         -   track time scalar
     */
 
+    private void Start()
+    {
+        UpdateStatText();
+    }
+
     public void AdjustProgression(ChoiceEvent change, int choice)
     {
         (int t, int s, int ex, int en, int a) points = change.GetPointChange();
@@ -54,6 +62,8 @@ public class ProgressionTracker : MonoBehaviour
         Debug.Log($"New Values: {levelTechnology} {levelStability} {levelExploration} {levelEnlightenment} {levelAbundance}");
 
         //  TODO: check if any values are negative (then lose)
+
+        UpdateStatText();
     }
 
     private void NextMilestone()
@@ -66,5 +76,10 @@ public class ProgressionTracker : MonoBehaviour
         //  increase scalar
         milestoneScalar *= 5f;
     }
-    
+
+    private void UpdateStatText()
+    {
+        statText.text = $"Technology: {levelTechnology}\nSocial Stability: {levelStability}\nExploration: {levelExploration}\nCultural Enlightenment: {levelEnlightenment}\nResource Abundance: {levelAbundance}";
+    }
+
 }
