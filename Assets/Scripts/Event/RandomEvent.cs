@@ -18,11 +18,11 @@ public class RandomEvent : MonoBehaviour
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI description;
     public ProcessChoiceEvent choiceEvent;
-
+    
     private ChoiceEvent currentEvent;
     private RandomEventHandler handler;
     private Animator animator;
-
+    
     private void Start()
     {
         handler = GetComponent<RandomEventHandler>();
@@ -53,4 +53,5 @@ public class RandomEvent : MonoBehaviour
         currentEvent = null;
         animator.SetBool("EventBarVisible", false);
     }
+
 }
