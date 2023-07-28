@@ -9,6 +9,6 @@ public class TimeTextUpdater : MonoBehaviour
 
     public void UpdateText(float time)
     {
-        timeText.text = $"Year {Mathf.Floor(time)} A.D.";
+        timeText.text = $"{Mathf.Floor(time)}";
     }
 }

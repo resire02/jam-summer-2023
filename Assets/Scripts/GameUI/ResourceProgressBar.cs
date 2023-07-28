@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 #if UNITY_EDITOR
     using UnityEditor;
@@ -17,7 +18,8 @@ public class ResourceProgressBar : MonoBehaviour
             obj.transform.SetParent(Selection.activeGameObject.transform, false);
         }
     #endif
-    
+
+    public TextMeshProUGUI textComponent;
     public Image barFill;
     public Image border;
     [SerializeField] private float barValue = 0f;
@@ -26,12 +28,18 @@ public class ResourceProgressBar : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateBarFill();
+        UpdateTextValue();
     }
 
     private void UpdateBarFill()
     {
         barValue = Mathf.Clamp(barValue, 0, barMax);
         barFill.fillAmount = barValue / barMax;
+    }
+
+    private void UpdateTextValue()
+    {
+        textComponent.text = $"{(int) barValue}";
     }
 
     public float GetBarValue() { return barValue; }
