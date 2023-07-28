@@ -6,7 +6,7 @@ using UnityEngine;
 public static class RandomEventList
 {
     private static Dictionary<Age,List<ChoiceEvent>> eventList = new Dictionary<Age,List<ChoiceEvent>>();
-    private static readonly ChoiceEvent DEFAULT = new ChoiceEvent("Event Title", "Event Text", (0, 0, 0, 0, 0));
+    private static readonly ChoiceEvent DEFAULT = new ChoiceEvent("Event Title", "Event Text", (10, 10, 10, 10, 10));
 
     //  must be called before usingSelectRandomEvent!
     public static void Init()

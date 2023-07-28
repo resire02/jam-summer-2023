@@ -10,8 +10,6 @@ public class TextUpdateEvent : UnityEvent<float> {}
 //  Handles Core Game Logic
 public class ProgressionTracker : MonoBehaviour
 {
-    public TextMeshProUGUI statText;
-
     /// Main Parameters
     private float levelTechnology       = 0f;
     private float levelStability        = 0f;
@@ -21,6 +19,12 @@ public class ProgressionTracker : MonoBehaviour
     private Age currentStage            = Age.Prehistoric;
     private float timeElapsed           = 0f;
     private float milestoneScalar       = 1f;
+
+    [SerializeField] private ResourceProgressBar barTech;
+    [SerializeField] private ResourceProgressBar barStab;
+    [SerializeField] private ResourceProgressBar barExplore;
+    [SerializeField] private ResourceProgressBar barEnlight;
+    [SerializeField] private ResourceProgressBar barAbundance;
 
     /// Getter Functions
     public float GetTechnologyLevel()       {   return levelTechnology;     }
@@ -46,7 +50,7 @@ public class ProgressionTracker : MonoBehaviour
 
     private void Start()
     {
-        UpdateStatText();
+        UpdateStats();
     }
 
     public void AdjustProgression(ChoiceEvent change, int choice)
@@ -63,7 +67,7 @@ public class ProgressionTracker : MonoBehaviour
 
         //  TODO: check if any values are negative (then lose)
 
-        UpdateStatText();
+        UpdateStats();
     }
 
     private void NextMilestone()
@@ -77,9 +81,13 @@ public class ProgressionTracker : MonoBehaviour
         milestoneScalar *= 5f;
     }
 
-    private void UpdateStatText()
+    private void UpdateStats()
     {
-        statText.text = $"Technology: {levelTechnology}\nSocial Stability: {levelStability}\nExploration: {levelExploration}\nCultural Enlightenment: {levelEnlightenment}\nResource Abundance: {levelAbundance}";
+        barTech.SetBarValue(levelTechnology);
+        barStab.SetBarValue(levelStability);
+        barExplore.SetBarValue(levelExploration);
+        barEnlight.SetBarValue(levelEnlightenment);
+        barAbundance.SetBarValue(levelAbundance);
     }
 
 }
