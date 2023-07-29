@@ -5,16 +5,23 @@ using TMPro;
 
 public class MouseHintProperty : MonoBehaviour
 {
-    private TextMeshProUGUI textComponent;
+    [SerializeField] private TextMeshProUGUI textTitle;
+    [SerializeField] private TextMeshProUGUI textDescription;
 
-    private void Start()
+    public void UpdateTextTitle(string title)
     {
-        textComponent = GetComponent<TextMeshProUGUI>();
+        textTitle.text = title;
     }
 
-    public void UpdateText(string text)
+    public void UpdateTextDescription(string description)
     {
-        textComponent.text = text;
+        textDescription.text = description;
+    }
+
+    public void ClearAllText()
+    {
+        textTitle.text = string.Empty;
+        textDescription.text = string.Empty;
     }
     
 }
