@@ -12,8 +12,7 @@ public class ImageLoader : MonoBehaviour
 
     private void Start()
     {
-        transition.color = new Color(0, 0, 0, 1);
-        SetImage("Prehistoric");
+        SetImage("PrehistoricWithSky");
     }
 
     private void FixedUpdate()
