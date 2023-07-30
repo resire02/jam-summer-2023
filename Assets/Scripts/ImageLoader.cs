@@ -12,12 +12,24 @@ public class ImageLoader : MonoBehaviour
 
     private void Start()
     {
+        transition.color = new Color(0, 0, 0, 1);
         SetImage("Prehistoric");
     }
 
     private void FixedUpdate()
     {
         if(!inTransition) return;
+        
+        if(transition.color.a > 0f)
+        {
+            Color c = transition.color;
+            c.a -= 0.01f;
+            transition.color = c;
+        }
+        else
+        {
+            inTransition = true;
+        }
     }
 
     //  files need to be in `Resources/Image`
