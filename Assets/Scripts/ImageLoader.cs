@@ -10,7 +10,7 @@ public class ImageLoader : MonoBehaviour
 
     private void Start()
     {
-        SetImage("Prehistoric");
+        SetImage("PrehistoricWithSky");
     }
 
     //  files need to be in `Resources/Image`
