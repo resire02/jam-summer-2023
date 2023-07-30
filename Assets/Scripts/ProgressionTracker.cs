@@ -71,7 +71,13 @@ public class ProgressionTracker : MonoBehaviour
         levelExploration += points.ex * milestoneScalar;
         levelEnlightenment += points.en * milestoneScalar;
         levelAbundance += points.a * milestoneScalar;
-        
+
+        levelTechnology = Mathf.Max(levelTechnology, 0f);
+        levelStability = Mathf.Max(levelStability, 0f);
+        levelExploration = Mathf.Max(levelExploration, 0f);
+        levelEnlightenment = Mathf.Max(levelEnlightenment, 0f);
+        levelAbundance = Mathf.Max(levelAbundance, 0f);
+
         Debug.Log($"New Values: {levelTechnology} {levelStability} {levelExploration} {levelEnlightenment} {levelAbundance}");
 
         //  TODO: check if any values are negative (then lose)

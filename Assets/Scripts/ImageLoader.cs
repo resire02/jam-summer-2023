@@ -8,13 +8,14 @@ public class ImageLoader : MonoBehaviour
     [SerializeField] private Image background;
     [SerializeField] private Image foreground;
     [SerializeField] private Image transition;
-    private Sprite BackSprite;
-    private Sprite FrontSprite;
 
+    private Sprite backSprite;
+    private Sprite frontSprite;
     private bool inTransition;
 
     private void Start()
     {
+        ImageLoadedRef.Init();
         transition.color = new Color(0, 0, 0, 1);
         SetImageBackground("PrehistoricWithSky");
         SetImageForeground("PrehistoricBase");
@@ -41,14 +42,23 @@ public class ImageLoader : MonoBehaviour
     {
         transition.color = new Color(0, 0, 0, 1);
         inTransition = true;
-        BackSprite = Instantiate(Resources.Load<Sprite>($"Image/{filename}"));
-        background.sprite = BackSprite;
+        backSprite = Instantiate(Resources.Load<Sprite>($"Image/{filename}"));
+        background.sprite = backSprite;
     }
+
     public void SetImageForeground(string filename)
     {
-        transition.color = new Color(0, 0, 0, 1);
-        inTransition = true;
-        FrontSprite = Instantiate(Resources.Load<Sprite>($"Image/{filename}"));
-        foreground.sprite = FrontSprite;
+        frontSprite = Instantiate(Resources.Load<Sprite>($"Image/{filename}"));
+        foreground.sprite = frontSprite;
+        ScaleForeground(filename);
+    }
+
+    private void ScaleForeground(string name)
+    {
+        (float scale, float x, float y) properties = ImageLoadedRef.GetForegroundScalar(name);
+        properties.scale = Mathf.Clamp(properties.scale, 0f, 1f);
+        foreground.transform.localScale = new Vector3(properties.scale, properties.scale, properties.scale);
+
+        foreground.transform.position = foreground.transform.position + new Vector3(properties.x, properties.y, 0f);
     }
 }
