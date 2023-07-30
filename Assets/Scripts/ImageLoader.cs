@@ -12,7 +12,7 @@ public class ImageLoader : MonoBehaviour
 
     private void Start()
     {
-        SetImage("CaveBackground");
+        SetImage("Prehistoric");
     }
 
     private void FixedUpdate()
