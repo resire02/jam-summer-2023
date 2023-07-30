@@ -6,15 +6,18 @@ using UnityEngine.UI;
 public class ImageLoader : MonoBehaviour
 {
     [SerializeField] private Image background;
+    [SerializeField] private Image foreground;
     [SerializeField] private Image transition;
-    private Sprite currentSprite;
+    private Sprite BackSprite;
+    private Sprite FrontSprite;
 
     private bool inTransition;
 
     private void Start()
     {
         transition.color = new Color(0, 0, 0, 1);
-        SetImage("PrehistoricWithSky");
+        SetImageBackground("PrehistoricWithSky");
+        SetImageForeground("PrehistoricBase");
     }
 
     private void FixedUpdate()
@@ -34,11 +37,18 @@ public class ImageLoader : MonoBehaviour
     }
 
     //  files need to be in `Resources/Image`
-    public void SetImage(string filename)
+    public void SetImageBackground(string filename)
     {
         transition.color = new Color(0, 0, 0, 1);
         inTransition = true;
-        currentSprite = Instantiate(Resources.Load<Sprite>($"Image/{filename}"));
-        background.sprite = currentSprite;
+        BackSprite = Instantiate(Resources.Load<Sprite>($"Image/{filename}"));
+        background.sprite = BackSprite;
+    }
+    public void SetImageForeground(string filename)
+    {
+        transition.color = new Color(0, 0, 0, 1);
+        inTransition = true;
+        FrontSprite = Instantiate(Resources.Load<Sprite>($"Image/{filename}"));
+        foreground.sprite = FrontSprite;
     }
 }

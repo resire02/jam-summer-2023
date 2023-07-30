@@ -25,7 +25,7 @@ public class MilestoneEventHandler : MonoBehaviour
         Debug.Log("Triggered Milestone Event");
 
         //  TODO: prompt milestone event (no option), play cutscene?
-        imgLd.SetImage("MilestonePlaceholder");
+        imgLd.SetImageBackground("MilestonePlaceholder");
         milestonePanel.SetActive(true);
         milestoneEvent = MilestoneEventList.GetMilestoneEvent(age);
 
