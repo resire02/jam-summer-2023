@@ -10,7 +10,7 @@ public class UpdateTextEvent : UnityEvent<float>
 }
 
 [System.Serializable]
-public class MilestoneEvent : UnityEvent<Age>
+public class ImportantEvent : UnityEvent<Age>
 {
 
 }
@@ -26,7 +26,7 @@ public class RandomEventHandler : MonoBehaviour
     [SerializeField] private int eventQuota = 3;
     
     public UpdateTextEvent updateTimeText;
-    public MilestoneEvent milestoneEvent;
+    public ImportantEvent milestoneEvent;
     private float eventTimer = 0f;
     private bool eventIsOccurring = false;
     private RandomEvent randomEvent;

@@ -8,6 +8,7 @@ public class ImageLoader : MonoBehaviour
     [SerializeField] private Image background;
     [SerializeField] private Image transition;
     private Sprite currentSprite;
+
     private bool inTransition;
 
     private void Start()
@@ -35,6 +36,7 @@ public class ImageLoader : MonoBehaviour
     //  files need to be in `Resources/Image`
     public void SetImage(string filename)
     {
+        transition.color = new Color(0, 0, 0, 1);
         inTransition = true;
         currentSprite = Instantiate(Resources.Load<Sprite>($"Image/{filename}"));
         background.sprite = currentSprite;

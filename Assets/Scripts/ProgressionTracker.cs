@@ -55,17 +55,27 @@ public class ProgressionTracker : MonoBehaviour
 
     public void AdjustProgression(ChoiceEvent change, int choice)
     {
-        (int t, int s, int ex, int en, int a) points = change.GetPointChange();
+        (int t, int s, int ex, int en, int a) points;
 
-        levelTechnology += points.t * milestoneScalar * choice;
-        levelStability += points.s * milestoneScalar * choice;
-        levelExploration += points.ex * milestoneScalar * choice;
-        levelEnlightenment += points.en * milestoneScalar * choice;
-        levelAbundance += points.a * milestoneScalar * choice;
-
+        if(choice == 1)
+        {
+            points = change.GetAcceptPointChange();
+        }
+        else
+        {
+            points = change.GetDeclinePointChange();
+        }
+        
+        levelTechnology += points.t * milestoneScalar;
+        levelStability += points.s * milestoneScalar;
+        levelExploration += points.ex * milestoneScalar;
+        levelEnlightenment += points.en * milestoneScalar;
+        levelAbundance += points.a * milestoneScalar;
+        
         Debug.Log($"New Values: {levelTechnology} {levelStability} {levelExploration} {levelEnlightenment} {levelAbundance}");
 
         //  TODO: check if any values are negative (then lose)
+
 
         UpdateStats();
     }

@@ -439,7 +439,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2720,7 +2720,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -67, y: 145}
+  m_AnchoredPosition: {x: -70, y: 121}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &934445138
@@ -3492,8 +3492,8 @@ GameObject:
   - component: {fileID: 1074221457}
   - component: {fileID: 1074221455}
   - component: {fileID: 1074221458}
-  - component: {fileID: 1074221459}
   - component: {fileID: 1074221461}
+  - component: {fileID: 1074221459}
   m_Layer: 0
   m_Name: GameLogic
   m_TagString: Untagged
@@ -3562,7 +3562,7 @@ MonoBehaviour:
   eventTriggerInterval: 10
   gameSpeed: 5
   startingYear: 0
-  eventQuota: 3
+  eventQuota: 0
   updateTimeText:
     m_PersistentCalls:
       m_Calls:
@@ -3661,6 +3661,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   milestonePanel: {fileID: 1013831410}
+  title: {fileID: 480562390}
+  description: {fileID: 949640379}
 --- !u!114 &1074221460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4809,6 +4811,7 @@ GameObject:
   - component: {fileID: 1482584435}
   - component: {fileID: 1482584437}
   - component: {fileID: 1482584436}
+  - component: {fileID: 1482584438}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -4875,6 +4878,14 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482584434}
   m_CullTransparentMesh: 1
+--- !u!33 &1482584438
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482584434}
+  m_Mesh: {fileID: 0}
 --- !u!1 &1505320860
 GameObject:
   m_ObjectHideFlags: 0

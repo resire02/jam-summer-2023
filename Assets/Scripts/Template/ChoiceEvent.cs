@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class ChoiceEvent
 {
-    private (int Tech, int Stablity, int Explore, int Englight, int Resource) points;
+    private (int Tech, int Stablity, int Explore, int Enlight, int Resource) acceptPoints;
+    private (int Tech, int Stablity, int Explore, int Enlight, int Resource) declinePoints;
     private (string Title, string Description) text;
 
-    public ChoiceEvent(string title, string desc, (int, int, int, int, int) change)
+    public ChoiceEvent(string title, string desc, (int, int, int, int, int) accept, (int, int, int, int, int) decline)
     {
-        this.points = change;
+        this.acceptPoints = accept;
+        this.declinePoints = decline;
         this.text = (title, desc);
     }
 
     /// GETTER METHODS
     public string GetTitle() { return text.Title; }
     public string GetDescription() { return text.Description; }
-    public (int Tech, int Stablity, int Explore, int Englight, int Resource) GetPointChange() { return points; }
+    public (int Tech, int Stablity, int Explore, int Enlight, int Resource) GetAcceptPointChange() { return acceptPoints; }
+    public (int Tech, int Stablity, int Explore, int Enlight, int Resource) GetDeclinePointChange() { return declinePoints; }
     
 }
