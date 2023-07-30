@@ -56,7 +56,7 @@ public class AudioHandler : MonoBehaviour
             audioIndex[clip].Stop();
         
         if(audioIndex[clip].clip == null)
-            audioIndex[clip].clip = (AudioClip) Resources.Load($"SFX/{clip}");
+            audioIndex[clip].clip = (AudioClip) Resources.Load($"Audio/{clip}");
         
         audioIndex[clip].loop = looped;
         audioIndex[clip].Play();

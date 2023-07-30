@@ -19,6 +19,7 @@ public class RandomEvent : MonoBehaviour
     public TextMeshProUGUI description;
     public ProcessChoiceEvent choiceEvent;
     
+    [SerializeField] private AudioRequest request;
     private ChoiceEvent currentEvent;
     private RandomEventHandler handler;
     private Animator animator;
@@ -46,9 +47,15 @@ public class RandomEvent : MonoBehaviour
         if(!handler.IsEventHappening()) return;
 
         if(choice == 1)
+        {
+            request.Invoke("Accept", false);
             choiceEvent.Invoke(currentEvent, 1);
+        }
         else
+        {
+            request.Invoke("Decline", false);
             choiceEvent.Invoke(currentEvent, -1);
+        }
 
         currentEvent = null;
         animator.SetBool("EventBarVisible", false);
