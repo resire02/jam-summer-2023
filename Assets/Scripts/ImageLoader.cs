@@ -37,8 +37,18 @@ public class ImageLoader : MonoBehaviour
         }
     }
 
+    public void SetScene(string background, string foreground)
+    {
+        SetImageBackground(background);
+
+        if(foreground.Equals("none"))
+            this.foreground.enabled = false;
+        else
+            SetImageForeground(foreground);
+    }
+
     //  files need to be in `Resources/Image`
-    public void SetImageBackground(string filename)
+    private void SetImageBackground(string filename)
     {
         transition.color = new Color(0, 0, 0, 1);
         inTransition = true;
@@ -46,8 +56,10 @@ public class ImageLoader : MonoBehaviour
         background.sprite = backSprite;
     }
 
-    public void SetImageForeground(string filename)
+    private void SetImageForeground(string filename)
     {
+        if(!foreground.enabled) foreground.enabled = true;
+
         frontSprite = Instantiate(Resources.Load<Sprite>($"Image/{filename}"));
         foreground.sprite = frontSprite;
         ScaleForeground(filename);

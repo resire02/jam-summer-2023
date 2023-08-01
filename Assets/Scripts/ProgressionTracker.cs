@@ -40,8 +40,8 @@ public class ProgressionTracker : MonoBehaviour
         X   add chance for random event to occur (pause year counter & wait for player input)
         X   add interaction between random events and timer (wait for player input before resuming timer)
         X   calculate effects of interaction event and update resource values accordingly
-        -   check if player's resources are below minimum survivable threshold (and exit game if so)
-        -   trigger milestone events every n events
+        /   check if player's resources are below minimum survivable threshold (and exit game if so)
+        X   trigger milestone events every n events
         -   update technology enum when threshold & milestone requirements are met
         -   call "the great filter" event when minimum requirements for singularity are met
         -   game ends when singularity is achieved
@@ -79,9 +79,6 @@ public class ProgressionTracker : MonoBehaviour
         levelAbundance = Mathf.Max(levelAbundance, 0f);
 
         Debug.Log($"New Values: {levelTechnology} {levelStability} {levelExploration} {levelEnlightenment} {levelAbundance}");
-
-        //  TODO: check if any values are negative (then lose)
-
 
         UpdateStats();
     }

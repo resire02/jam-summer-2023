@@ -9,6 +9,8 @@ public static class ImageLoadedRef
 
     public static void Init()
     {
+        if(foregroundScale.Count > 0) return;
+
         //  TODO: add scalars here if necessary
         foregroundScale.Add("PrehistoricBase", (0.5f, 0f, 0f));
     }

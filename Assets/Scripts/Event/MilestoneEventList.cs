@@ -9,6 +9,8 @@ public static class MilestoneEventList
 
     public static void Init()
     {
+        if(milestoneList.Count > 0) return;
+
         //  TODO: add milestone events here
         milestoneList.Add(Age.Prehistoric, new MilestoneEvent(
             "Massive Flood", "There is a massive flood. Watch Out!", (-10, -10, -10, -10, -10)
