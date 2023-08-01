@@ -78,7 +78,7 @@ public class ProgressionTracker : MonoBehaviour
         levelEnlightenment = Mathf.Max(levelEnlightenment, 0f);
         levelAbundance = Mathf.Max(levelAbundance, 0f);
 
-        Debug.Log($"New Values: {levelTechnology} {levelStability} {levelExploration} {levelEnlightenment} {levelAbundance}");
+        // Debug.Log($"New Values: {levelTechnology} {levelStability} {levelExploration} {levelEnlightenment} {levelAbundance}");
 
         UpdateStats();
     }
