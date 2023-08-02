@@ -40,6 +40,22 @@ public class ChoiceEvent
         chance = prob;
     }
 
+    public ChoiceEvent(
+        (string, string) context,
+        string goodText,
+        string badText,
+        PointChange good,
+        PointChange bad,
+        int prob) : this()
+    {
+        eventContext = context;
+        contextGood = goodText;
+        contextBad = badText;
+        resultGood = good;
+        resultBad = bad;
+        chance = prob;
+    }
+
     //  a chance value of `2` means the chance of success is 1 in 2 (50%)
     public bool GambleSuccess()
     {

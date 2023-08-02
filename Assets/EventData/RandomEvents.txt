@@ -1,0 +1,1 @@
+1|Someone has an idea|A member of your tribe want to try to rub sticks together|Your member created fire!|Nothing happened and you lost your sticks|2,0,0,1,1|0,-1,0,0,-2|2
