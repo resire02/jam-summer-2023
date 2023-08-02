@@ -6,11 +6,32 @@ using UnityEngine;
 public static class RandomEventList
 {
     private static Dictionary<Age,List<ChoiceEvent>> eventList = new Dictionary<Age,List<ChoiceEvent>>();
-    private static readonly ChoiceEvent DEFAULT = new ChoiceEvent("Event Title", "Event Text", (1, 1, 1, 1, 1), (-1, -1, -1, -1, -1));
+    private static readonly ChoiceEvent DEFAULT = new ChoiceEvent(
+        ("Event Title", "Event Description"), 
+        "Good Description", 
+        "Bad Description", 
+        (1, 1, 1, 1, 1), 
+        (-1, -1, -1, -1, -1), 
+        2
+    );
 
     //  must be called before usingSelectRandomEvent!
     public static void Init()
     {
+        if(eventList.Count > 0) return;
+
+        //  initalize all lists
+        eventList[Age.Prehistoric] = new List<ChoiceEvent>();
+        eventList[Age.Civilization] = new List<ChoiceEvent>();
+        eventList[Age.Medieval] = new List<ChoiceEvent>();
+        eventList[Age.Colonial] = new List<ChoiceEvent>();
+        eventList[Age.Industrial] = new List<ChoiceEvent>();
+        eventList[Age.Information] = new List<ChoiceEvent>();
+        eventList[Age.Space] = new List<ChoiceEvent>();
+        eventList[Age.Galactic] = new List<ChoiceEvent>();
+        eventList[Age.Cosmic] = new List<ChoiceEvent>();
+        eventList[Age.Singularity] = new List<ChoiceEvent>();
+
         InitializeAllEvents();
     }
 
@@ -26,7 +47,7 @@ public static class RandomEventList
     private static ChoiceEvent SelectRandomEventFromList(List<ChoiceEvent> list)
     {
         if(list.Count < 1) return DEFAULT;
-        int index = Random.Range(0, list.Count - 1);
+        int index = Random.Range(0, list.Count);
         ChoiceEvent choice = list[index];
         list.RemoveAt(index);
         Debug.Log($"Length Modified: {list.Count}");
@@ -36,20 +57,15 @@ public static class RandomEventList
     //  populates eventList with events
     private static void InitializeAllEvents()
     {
-        //  initalize all lists
-        eventList[Age.Prehistoric] = new List<ChoiceEvent>();
-        eventList[Age.Civilization] = new List<ChoiceEvent>();
-        eventList[Age.Medieval] = new List<ChoiceEvent>();
-        eventList[Age.Colonial] = new List<ChoiceEvent>();
-        eventList[Age.Industrial] = new List<ChoiceEvent>();
-        eventList[Age.Information] = new List<ChoiceEvent>();
-        eventList[Age.Space] = new List<ChoiceEvent>();
-        eventList[Age.Galactic] = new List<ChoiceEvent>();
-        eventList[Age.Cosmic] = new List<ChoiceEvent>();
-        eventList[Age.Singularity] = new List<ChoiceEvent>();
-
         //  TODO: add all events here
-        // eventList[Age.Prehistoric].Add(new ChoiceEvent("title", "description", (0, 0, 0, 0, 0)));
+        eventList[Age.Prehistoric].Add(new ChoiceEvent(
+            ("Someone has an idea", "A member of your tribes want to try to rub sticks together"),
+            "Your member created fire!",
+            "Nothing happened and you lost your sticks",
+            (2, 0, 0, 1, 1),
+            (0, -1, 0, 0, -2),
+            2
+        ));
         
     }
 }

@@ -13,7 +13,9 @@ public static class MilestoneEventList
 
         //  TODO: add milestone events here
         milestoneList.Add(Age.Prehistoric, new MilestoneEvent(
-            "Massive Flood", "There is a massive flood. Watch Out!", (-10, -10, -10, -10, -10)
+            "Massive Flood", 
+            "There is a massive flood. Watch Out!", 
+            (-10, -10, -10, -10, -10)
         ));
 
         //   ...

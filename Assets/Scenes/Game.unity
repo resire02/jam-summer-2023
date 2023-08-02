@@ -703,8 +703,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1074221457}
         m_TargetAssemblyTypeName: RandomEvent, Assembly-CSharp
-        m_MethodName: ProcessPlayerChoice
-        m_Mode: 3
+        m_MethodName: OnPlayerDecline
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3757,6 +3757,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60e3126595242d342ba4e655f2654b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textSprite:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1464179568}
+        m_TargetAssemblyTypeName: TextSpriteGenerator, Assembly-CSharp
+        m_MethodName: TriggerAnimation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   barTech: {fileID: 822599502}
   barStab: {fileID: 1141673526}
   barExplore: {fileID: 949997453}
@@ -3806,7 +3821,7 @@ MonoBehaviour:
   eventTriggerInterval: 10
   gameSpeed: 10
   startingYear: 0
-  eventQuota: 3
+  eventQuota: 2
   updateTimeText:
     m_PersistentCalls:
       m_Calls:
@@ -3852,21 +3867,10 @@ MonoBehaviour:
   eventBar: {fileID: 391727219}
   titleText: {fileID: 734438864}
   description: {fileID: 1505320862}
-  choiceEvent:
+  declineButton: {fileID: 147561656}
+  handleEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1074221456}
-        m_TargetAssemblyTypeName: RandomEventHandler, Assembly-CSharp
-        m_MethodName: OnEventEnd
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1074221453}
         m_TargetAssemblyTypeName: ProgressionTracker, Assembly-CSharp
         m_MethodName: AdjustProgression
@@ -3879,9 +3883,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  setSpriteColor:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 1464179568}
         m_TargetAssemblyTypeName: TextSpriteGenerator, Assembly-CSharp
-        m_MethodName: TriggerAnimation
+        m_MethodName: SetStatusColor
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4604,8 +4611,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1074221457}
         m_TargetAssemblyTypeName: RandomEvent, Assembly-CSharp
-        m_MethodName: ProcessPlayerChoice
-        m_Mode: 3
+        m_MethodName: OnPlayerAccept
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5069,7 +5076,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Text Sprite
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5132,7 +5139,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -323.94266, y: 0, z: -323.94217, w: 0}
+  m_margin: {x: -831.2748, y: 0, z: -848.7014, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5179,8 +5186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e846c13acce3149abab5f2eaea67ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceptColor: {r: 0.34509805, g: 0.86274517, b: 0.08627451, a: 0}
-  declineColor: {r: 0.9607844, g: 0, b: 0, a: 0}
+  successColor: {r: 0.34509805, g: 0.86274517, b: 0.08627451, a: 0}
+  failureColor: {r: 0.9607844, g: 0, b: 0, a: 0}
   textSprite: {fileID: 1464179565}
 --- !u!1 &1466905306
 GameObject:

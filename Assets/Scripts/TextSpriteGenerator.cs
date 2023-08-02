@@ -5,8 +5,8 @@ using TMPro;
 
 public class TextSpriteGenerator : MonoBehaviour
 {
-    public Color acceptColor;
-    public Color declineColor;
+    public Color successColor;
+    public Color failureColor;
     [SerializeField] private TextMeshProUGUI textSprite;
     private Animator animator;
 
@@ -15,34 +15,31 @@ public class TextSpriteGenerator : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void TriggerAnimation(ChoiceEvent cEvent, int choice)
+    public void SetStatusColor(int status) 
     {
-        (int t, int s, int e, int en, int a) points;
-
-        if(choice == 1)
-        {
-            textSprite.color = acceptColor;
-            points = cEvent.GetAcceptPointChange();
-        }
+        if(status > 0)
+            textSprite.color = successColor;
         else
-        {
-            textSprite.color = declineColor;
-            points = cEvent.GetDeclinePointChange();
-        }
+            textSprite.color = failureColor;
+    }
 
-        SetPointValues(points.t, points.s, points.e, points.en, points.a);
+    //  use this to call animation
+    public void TriggerAnimation(PointChange points)
+    {
+        UpdateText(points);
         animator.SetTrigger("PlayTextSpriteFade");
     }
 
-    private void SetPointValues(int t, int s, int e, int en, int a)
+    private void UpdateText(PointChange change)
     {
-        textSprite.text = $"{AppendPlus(t)}{t} {AppendPlus(s)}{s} {AppendPlus(e)}{e} {AppendPlus(en)}{en} {AppendPlus(a)}{a}";
+        textSprite.text = $"{FormatNumber(change.technology)} {FormatNumber(change.stability)} {FormatNumber(change.exploration)} {FormatNumber(change.enlightenment)} {FormatNumber(change.abundance)}";
     }
 
-    private string AppendPlus(int num)
+    //  adds leading plus if necessary
+    private string FormatNumber(int num)
     {
         if(num >= 0)
-            return "+";
-        return "";
+            return $"+{num}";
+        return $"{num}";
     }
 }

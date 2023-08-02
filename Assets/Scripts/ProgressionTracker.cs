@@ -20,6 +20,7 @@ public class ProgressionTracker : MonoBehaviour
     private float timeElapsed           = 0f;
     private float milestoneScalar       = 1f;
 
+    [SerializeField] private PointChangeEvent textSprite;
     [SerializeField] private ResourceProgressBar barTech;
     [SerializeField] private ResourceProgressBar barStab;
     [SerializeField] private ResourceProgressBar barExplore;
@@ -53,24 +54,16 @@ public class ProgressionTracker : MonoBehaviour
         UpdateStats();
     }
 
-    public void AdjustProgression(ChoiceEvent change, int choice)
-    {
-        (int t, int s, int ex, int en, int a) points;
+    //  changes progression values
+    public void AdjustProgression(PointChange change)
+    {        
+        textSprite.Invoke(change);
 
-        if(choice == 1)
-        {
-            points = change.GetAcceptPointChange();
-        }
-        else
-        {
-            points = change.GetDeclinePointChange();
-        }
-        
-        levelTechnology += points.t * milestoneScalar;
-        levelStability += points.s * milestoneScalar;
-        levelExploration += points.ex * milestoneScalar;
-        levelEnlightenment += points.en * milestoneScalar;
-        levelAbundance += points.a * milestoneScalar;
+        levelTechnology += change.technology * milestoneScalar;
+        levelStability += change.stability * milestoneScalar;
+        levelExploration += change.exploration * milestoneScalar;
+        levelEnlightenment += change.enlightenment * milestoneScalar;
+        levelAbundance += change.abundance * milestoneScalar;
 
         levelTechnology = Mathf.Max(levelTechnology, 0f);
         levelStability = Mathf.Max(levelStability, 0f);
@@ -83,7 +76,7 @@ public class ProgressionTracker : MonoBehaviour
         UpdateStats();
     }
 
-    private void NextMilestone()
+    private void AscendToNextMilestone()
     {
         //  set to next stage
         int next = (int) currentStage;
@@ -94,6 +87,7 @@ public class ProgressionTracker : MonoBehaviour
         milestoneScalar *= 5f;
     }
 
+    //  updates resource bar values on resource tab
     private void UpdateStats()
     {
         barTech.SetBarValue(levelTechnology);

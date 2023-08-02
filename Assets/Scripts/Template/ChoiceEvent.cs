@@ -2,23 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//  represents a random event that can happen
 public class ChoiceEvent
 {
-    private (int Tech, int Stablity, int Explore, int Enlight, int Resource) acceptPoints;
-    private (int Tech, int Stablity, int Explore, int Enlight, int Resource) declinePoints;
-    private (string Title, string Description) text;
+    public PointChange resultGood;
+    public PointChange resultBad;
+    public (string title, string description) eventContext;
+    public string contextGood;
+    public string contextBad;
+    private int chance;
 
-    public ChoiceEvent(string title, string desc, (int, int, int, int, int) accept, (int, int, int, int, int) decline)
+    /// *** CONSTRUCTOR MAYHEM  *** ///
+
+    public ChoiceEvent()
     {
-        this.acceptPoints = accept;
-        this.declinePoints = decline;
-        this.text = (title, desc);
+        resultGood = new PointChange(0, 0, 0, 0, 0);
+        resultBad = new PointChange(0, 0, 0, 0, 0);
+        eventContext = ("Event Title", "Event Description");
+        contextGood = "Success Description";
+        contextBad = "Failure Description";
+        chance = 2;
     }
 
-    /// GETTER METHODS
-    public string GetTitle() { return text.Title; }
-    public string GetDescription() { return text.Description; }
-    public (int Tech, int Stablity, int Explore, int Enlight, int Resource) GetAcceptPointChange() { return acceptPoints; }
-    public (int Tech, int Stablity, int Explore, int Enlight, int Resource) GetDeclinePointChange() { return declinePoints; }
-    
+    public ChoiceEvent(
+        (string, string) context,
+        string goodText,
+        string badText,
+        (int, int, int, int, int) good,
+        (int, int, int, int, int) bad,
+        int prob) : this()
+    {
+        eventContext = context;
+        contextGood = goodText;
+        contextBad = badText;
+        resultGood = new PointChange(good);
+        resultBad = new PointChange(bad);
+        chance = prob;
+    }
+
+    //  a chance value of `2` means the chance of success is 1 in 2 (50%)
+    public bool GambleSuccess()
+    {
+        if(Random.Range(0, chance) == 0)
+            return true;
+        return false;
+    }
 }

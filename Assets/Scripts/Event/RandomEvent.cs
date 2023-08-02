@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using TMPro;
 
 [System.Serializable]
-public class ProcessChoiceEvent : UnityEvent<ChoiceEvent, int> 
+public class PointChangeEvent : UnityEvent<PointChange> 
 {
 
 }
@@ -14,18 +14,22 @@ public class ProcessChoiceEvent : UnityEvent<ChoiceEvent, int>
 [RequireComponent(typeof(RandomEventHandler))]
 public class RandomEvent : MonoBehaviour
 {
-    public GameObject eventBar;
-    public TextMeshProUGUI titleText;
-    public TextMeshProUGUI description;
-    public ProcessChoiceEvent choiceEvent;
-    
+    [SerializeField] private GameObject eventBar;
+    [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private TextMeshProUGUI description;
+    [SerializeField] private GameObject declineButton;
+    [SerializeField] private PointChangeEvent handleEvent;
+    [SerializeField] private UnityEvent<int> setSpriteColor;
     [SerializeField] private AudioRequest request;
+
     private ChoiceEvent currentEvent;
     private RandomEventHandler handler;
     private Animator animator;
+    private bool outcomeOccurred;
     
     private void Start()
     {
+        //  retrieve animator and handler
         handler = GetComponent<RandomEventHandler>();
         animator = eventBar.GetComponent<Animator>();
     }
@@ -33,32 +37,75 @@ public class RandomEvent : MonoBehaviour
     //  draws a random event from the event pool
     public void DetermineEvent(Age age)
     {
+        //  select random event
         currentEvent = RandomEventList.SelectRandomEvent(age);
-        animator.SetBool("EventBarVisible", true);
-        titleText.text = currentEvent.GetTitle();
-        description.text = currentEvent.GetDescription();
 
-        Debug.Log($"Event Called: {currentEvent.GetTitle()}");
+        //  play slider animation
+        animator.SetBool("EventBarVisible", true);
+
+        //  update event text
+        titleText.text = currentEvent.eventContext.title;
+        description.text = currentEvent.eventContext.description;
+
+        //  make decline button visible
+        declineButton.SetActive(true);
+
+        //  reset ok flag
+        outcomeOccurred = false;
+
+        Debug.Log($"Event Called: {currentEvent.eventContext.title}");
     }
 
-    //  used for button functionality
-    public void ProcessPlayerChoice(int choice)
+    //  for accept button functionality
+    public void OnPlayerAccept()
     {
         if(!handler.IsEventHappening()) return;
 
-        if(choice == 1)
+        if(outcomeOccurred)
         {
+            currentEvent = null;
             request.Invoke("Accept", false);
-            choiceEvent.Invoke(currentEvent, 1);
+            animator.SetBool("EventBarVisible", false);
+            handler.OnEventEnd();
+            return;
+        }
+
+        declineButton.SetActive(false);
+
+        if(currentEvent.GambleSuccess())
+        {
+            Debug.Log("Sucessful Event Triggered");
+            request.Invoke("Accept", false);
+            titleText.text = "Success";
+            description.text = currentEvent.contextGood;
+            setSpriteColor.Invoke(1);
+            handleEvent.Invoke(currentEvent.resultGood);
         }
         else
         {
+            Debug.Log("Failure Event Triggered");
             request.Invoke("Decline", false);
-            choiceEvent.Invoke(currentEvent, -1);
+            titleText.text = "Failure";
+            description.text = currentEvent.contextBad;
+            setSpriteColor.Invoke(0);
+            handleEvent.Invoke(currentEvent.resultBad);
         }
 
+        outcomeOccurred = true;
+    }
+
+    //  for decline button functionality
+    public void OnPlayerDecline()
+    {
+        if(!handler.IsEventHappening()) return;
+
+        request.Invoke("Decline", false);
+
         currentEvent = null;
+
         animator.SetBool("EventBarVisible", false);
+
+        handler.OnEventEnd();
     }
 
 }
