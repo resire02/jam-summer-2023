@@ -24,9 +24,10 @@ public class RandomEventHandler : MonoBehaviour
     [SerializeField] private float gameSpeed = 2f;
     [SerializeField] private float startingYear = 0;
     [SerializeField] private int eventQuota = 3;
-    
+    [SerializeField] private UnityEvent<int> setSpriteColor;
     public UpdateTextEvent updateTimeText;
     public ImportantEvent milestoneEvent;
+
     private float eventTimer = 0f;
     private bool eventIsOccurring = false;
     private RandomEvent randomEvent;
@@ -61,7 +62,12 @@ public class RandomEventHandler : MonoBehaviour
     //  gambles on event chance
     public void GambleEvent(Age age)
     {
-        if(Random.Range(1, eventProbability) != 1) return;
+        if(Random.Range(1, eventProbability) != 1)
+        {
+            //  maybe adjust point gain here?
+            
+            return;
+        }
         
         if(eventCount == eventQuota)
         {

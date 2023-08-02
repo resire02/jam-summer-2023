@@ -59,13 +59,20 @@ public static class RandomEventList
     {
         //  TODO: add all events here
         eventList[Age.Prehistoric].Add(new ChoiceEvent(
-            ("Someone has an idea", "A member of your tribes want to try to rub sticks together"),
+            ("Someone has an idea", "A member of your tribe want to try to rub sticks together"),
             "Your member created fire!",
             "Nothing happened and you lost your sticks",
             (2, 0, 0, 1, 1),
             (0, -1, 0, 0, -2),
             2
         ));
-        
+        eventList[Age.Prehistoric].Add(new ChoiceEvent(
+            ("Mysterious creature spotted", "One of your tribesman came running from the woods, saying he spotted a hairy animal, do you investigate?"),
+            "Your tribesmen found a creature and killed it for meat",
+            "You ignored your tribesman",
+            (0, 1, 1, 0, 2),
+            (0, 0, -1, 0, 0),
+            2
+        ));
     }
 }
