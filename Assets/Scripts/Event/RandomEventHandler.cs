@@ -43,6 +43,15 @@ public class RandomEventHandler : MonoBehaviour
         RandomEventList.Init();
     }
 
+    public void Reset()
+    {
+        eventIsOccurring = false;
+        eventCount = 0;
+        eventTimer = 0f;
+        startingYear = 0f;
+        updateTimeText.Invoke(startingYear);
+    }
+
     private void FixedUpdate()
     {
         if(eventIsOccurring) return;

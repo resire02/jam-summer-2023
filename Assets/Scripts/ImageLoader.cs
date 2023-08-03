@@ -18,6 +18,12 @@ public class ImageLoader : MonoBehaviour
     private void Start()
     {
         ImageLoadedRef.Init();
+        Reset();
+    }
+
+    //  used to reset component to default state
+    public void Reset()
+    {
         SetScene(Age.Prehistoric);
     }
 

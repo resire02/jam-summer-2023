@@ -14,6 +14,11 @@ public class SpriteGenerator : MonoBehaviour
         spritesInScene = new List<GameObject>();
     }
 
+    public void Reset()
+    {
+        ClearAllSpritesFromScene();
+    }
+
     public void AddToScene(CustomSprite sprite)
     {
         GameObject gameObject = new GameObject(sprite.spritePath);

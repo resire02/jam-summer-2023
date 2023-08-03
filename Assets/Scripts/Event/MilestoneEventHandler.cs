@@ -10,6 +10,7 @@ public class MilestoneEventHandler : MonoBehaviour
     [SerializeField] private GameObject milestonePanel;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI description;
+    [SerializeField] private GameObject gameEndPanel;
     [SerializeField] private UnityEvent eventHandlerCallback;
 
     private Dictionary<Age, (string, string)> milestoneSceneData;
@@ -19,11 +20,17 @@ public class MilestoneEventHandler : MonoBehaviour
     
     private void Start()
     {
-        milestonePanel.SetActive(false);
+        Reset();
         imgLd = GetComponent<ImageLoader>();
-        progression = GetComponent<ProgressionTracker>();
+        progression = GetComponent<ProgressionTracker>();   
         MilestoneEventList.Init();
         PopulateMilestoneSceneData();
+    }
+
+    public void Reset()
+    {
+        gameEndPanel.SetActive(false);
+        milestonePanel.SetActive(false);
     }
 
     private void PopulateMilestoneSceneData()
@@ -60,13 +67,21 @@ public class MilestoneEventHandler : MonoBehaviour
         //  TODO: write custom function to handle milestone events
         progression.AdjustProgression(milestoneEvent.GetPointChange());
 
-        progression.AscendToNextMilestone();
+        if(progression.CheckIsAlive())
+        {
+            progression.AscendToNextMilestone();
 
-        //  TODO: play sound or animation or something?
-        eventHandlerCallback.Invoke();
+            //  TODO: play sound or animation or something?
+            eventHandlerCallback.Invoke();
 
-        //  hide milestone panel after clicking
-        milestonePanel.SetActive(false);
+            //  hide milestone panel after clicking
+            milestonePanel.SetActive(false);
+        }
+        else
+        {
+            gameEndPanel.SetActive(true);
+        }
+
     }
 
     private void UpdateText()

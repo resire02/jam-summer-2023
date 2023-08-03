@@ -10,6 +10,11 @@ public class MouseHintProperty : MonoBehaviour
 
     private void Start()
     {
+        Reset();
+    }
+
+    public void Reset()
+    {
         textTitle.text = string.Empty;
         textDescription.text = string.Empty;
     }

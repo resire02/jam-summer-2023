@@ -17,11 +17,12 @@ public class ProgressionTracker : MonoBehaviour
     private float levelEnlightenment    = 0f;
     private float levelAbundance        = 0f;
     private Age currentStage            = Age.Prehistoric;
-    private float timeElapsed           = 0f;
     private float milestoneScalar       = 1f;
 
     [SerializeField] private PointChangeEvent textSprite;       //  used to update year text
     [SerializeField] private ImportantEvent updateSceneEvent;   //  used to update background and foreground
+    
+    [Header("Resource Bars")]
     [SerializeField] private ResourceProgressBar barTech;
     [SerializeField] private ResourceProgressBar barStab;
     [SerializeField] private ResourceProgressBar barExplore;
@@ -35,7 +36,6 @@ public class ProgressionTracker : MonoBehaviour
     public float GetEnglightenmentLevel()   {   return levelEnlightenment;  }
     public float GetAbundanceLevel()        {   return levelAbundance;      }
     public Age GetTechnologicalStage()      {   return currentStage;        }
-    public float GetTimeElapsed()           {   return timeElapsed;         }
     
     /*
     TODO LIST:
@@ -52,6 +52,19 @@ public class ProgressionTracker : MonoBehaviour
 
     private void Start()
     {
+        UpdateStats();
+    }
+
+    public void Reset()
+    {
+        levelTechnology = 0f;
+        levelStability = 0f;
+        levelExploration = 0f;
+        levelEnlightenment = 0f;
+        levelAbundance = 0f;
+        currentStage = Age.Prehistoric;
+        milestoneScalar = 1f;
+
         UpdateStats();
     }
 
@@ -108,4 +121,16 @@ public class ProgressionTracker : MonoBehaviour
         barAbundance.SetBarValue(levelAbundance);
     }
 
+    public bool CheckIsAlive()
+    {
+        int check = 0;
+
+        if(levelTechnology == 0f) check++;
+        if(levelStability == 0f) check++;
+        if(levelExploration == 0f) check++;
+        if(levelEnlightenment == 0f) check++;
+        if(levelAbundance == 0f) check++;
+
+        return check < 3;
+    }
 }
