@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class ImageLoader : MonoBehaviour
 {
     [SerializeField] private Image background;
     [SerializeField] private Image foreground;
     [SerializeField] private Image transition;
+    [SerializeField] private UnityEvent clearSprites;
 
     private Sprite backSprite;
     private Sprite frontSprite;
@@ -52,6 +54,8 @@ public class ImageLoader : MonoBehaviour
             this.foreground.enabled = false;
         else
             SetImageForeground(foreground);
+
+        clearSprites.Invoke();
     }
 
     //  files need to be in `Resources/Image`

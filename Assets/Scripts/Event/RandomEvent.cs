@@ -80,6 +80,7 @@ public class RandomEvent : MonoBehaviour
             description.text = currentEvent.contextGood;
             setSpriteColor.Invoke(1);
             handleEvent.Invoke(currentEvent.resultGood);
+            GetComponent<SpriteGenerator>().AddToScene(new CustomSprite("PrehistoricBaseWithLogWithFire", 1000f, 500f, 0.5f));
         }
         else
         {
