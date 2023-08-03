@@ -16,9 +16,7 @@ public class ImageLoader : MonoBehaviour
     private void Start()
     {
         ImageLoadedRef.Init();
-        transition.color = new Color(0, 0, 0, 1);
-        SetImageBackground("PrehistoricWithSky");
-        SetImageForeground("PrehistoricBase");
+        SetScene(Age.Prehistoric);
     }
 
     private void FixedUpdate()
@@ -37,6 +35,15 @@ public class ImageLoader : MonoBehaviour
         }
     }
 
+    //  sets the current scene depending on the provided age
+    public void SetScene(Age age)
+    {
+        (string bg, string fg) scene = ImageLoadedRef.GetSceneData(age);
+
+        SetScene(scene.bg, scene.fg);
+    }
+
+    //  sets the scene using the specified background and foreground respectively
     public void SetScene(string background, string foreground)
     {
         SetImageBackground(background);
@@ -56,6 +63,7 @@ public class ImageLoader : MonoBehaviour
         background.sprite = backSprite;
     }
 
+    //  files need to be in `Resources/Image` also
     private void SetImageForeground(string filename)
     {
         if(!foreground.enabled) foreground.enabled = true;

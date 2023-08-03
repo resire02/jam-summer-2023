@@ -8,6 +8,12 @@ public class MouseHintProperty : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textTitle;
     [SerializeField] private TextMeshProUGUI textDescription;
 
+    private void Start()
+    {
+        textTitle.text = string.Empty;
+        textDescription.text = string.Empty;
+    }
+
     public void UpdateTextTitle(string title)
     {
         textTitle.text = title;

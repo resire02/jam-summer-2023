@@ -20,7 +20,8 @@ public class ProgressionTracker : MonoBehaviour
     private float timeElapsed           = 0f;
     private float milestoneScalar       = 1f;
 
-    [SerializeField] private PointChangeEvent textSprite;
+    [SerializeField] private PointChangeEvent textSprite;       //  used to update year text
+    [SerializeField] private ImportantEvent updateSceneEvent;       //  used to update background and foreground
     [SerializeField] private ResourceProgressBar barTech;
     [SerializeField] private ResourceProgressBar barStab;
     [SerializeField] private ResourceProgressBar barExplore;
@@ -76,7 +77,8 @@ public class ProgressionTracker : MonoBehaviour
         UpdateStats();
     }
 
-    private void AscendToNextMilestone()
+    //  increments to next milestone
+    public void AscendToNextMilestone()
     {
         //  set to next stage
         int next = (int) currentStage;
@@ -85,6 +87,9 @@ public class ProgressionTracker : MonoBehaviour
 
         //  increase scalar
         milestoneScalar *= 5f;
+
+        //  update scene
+        updateSceneEvent.Invoke(currentStage);
     }
 
     //  updates resource bar values on resource tab

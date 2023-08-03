@@ -5,9 +5,19 @@ using UnityEngine;
 public static class ImageLoadedRef
 {
     private static Dictionary<string, (float, float, float)> foregroundScale = new Dictionary<string, (float, float, float)>();
-    private readonly static (float, float, float) DEFAULT = (1f, 0f, 0f);
+    private static Dictionary<Age, (string, string)> sceneData = new Dictionary<Age, (string, string)>();
 
+    private readonly static (float, float, float) SCALAR_DEFAULT = (1f, 0f, 0f);
+    private readonly static (string, string) SCENE_DEFAULT = ("MilestonePlaceholder", "none");
+
+    //  initalize scene data and foregound scalars
     public static void Init()
+    {
+        InitForegroundScalars();
+        InitAgeSceneData();
+    }
+
+    private static void InitForegroundScalars()
     {
         if(foregroundScale.Count > 0) return;
 
@@ -15,10 +25,27 @@ public static class ImageLoadedRef
         foregroundScale.Add("PrehistoricBase", (0.5f, 0f, 0f));
     }
 
+    private static void InitAgeSceneData()
+    {
+        if(sceneData.Count > 0) return;
+
+        //  TODO: add scene data for all ages excluding extinct
+        sceneData.Add(Age.Prehistoric, ("PrehistoricWithSky", "PrehistoricBase"));
+    }
+
+    //  GETTER METHODS
+
     public static (float Scale, float XOffset, float YOffset) GetForegroundScalar(string name)
     {
-        if(!foregroundScale.ContainsKey(name)) return DEFAULT;
+        if(!foregroundScale.ContainsKey(name)) return SCALAR_DEFAULT;
 
         return foregroundScale[name];
+    }
+
+    public static (string bg, string fg) GetSceneData(Age age)
+    {
+        if(!sceneData.ContainsKey(age)) return SCENE_DEFAULT;
+
+        return sceneData[age];
     }
 }

@@ -10,6 +10,8 @@ public class MilestoneEventHandler : MonoBehaviour
     [SerializeField] private GameObject milestonePanel;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI description;
+    [SerializeField] private UnityEvent eventHandlerCallback;
+    private ProgressionTracker progression;
     private ImageLoader imgLd;
     private MilestoneEvent milestoneEvent;
     
@@ -17,6 +19,7 @@ public class MilestoneEventHandler : MonoBehaviour
     {
         milestonePanel.SetActive(false);
         imgLd = GetComponent<ImageLoader>();
+        progression = GetComponent<ProgressionTracker>();
         MilestoneEventList.Init();
     }
 
@@ -32,7 +35,18 @@ public class MilestoneEventHandler : MonoBehaviour
 
     public void HandleMilestone()
     {
-        
+        // Debug.Log("Pressed Button");
+
+        //  TODO: write custom function to handle milestone events
+        progression.AdjustProgression(milestoneEvent.GetPointChange());
+
+        progression.AscendToNextMilestone();
+
+        //  TODO: play sound or animation or something?
+        eventHandlerCallback.Invoke();
+
+        //  hide milestone panel after clicking
+        milestonePanel.SetActive(false);
     }
 
     private void UpdateText()

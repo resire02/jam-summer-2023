@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
         playerInput = new PlayerInput();
         controls = playerInput.Navigation;
 
+        //  input callbacks here
         controls.PauseGame.performed += ctx => onPauseGame.Invoke();
         controls.ShowResourceTab.performed += ctx => onShowTab.Invoke();
     }

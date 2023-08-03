@@ -1976,7 +1976,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 602564508}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1074221459}
+        m_TargetAssemblyTypeName: MilestoneEventHandler, Assembly-CSharp
+        m_MethodName: HandleMilestone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &602564510
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2070,8 +2082,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3772,6 +3784,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  updateSceneEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1074221461}
+        m_TargetAssemblyTypeName: ImageLoader, Assembly-CSharp
+        m_MethodName: SetScene
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   barTech: {fileID: 822599502}
   barStab: {fileID: 1141673526}
   barExplore: {fileID: 949997453}
@@ -3821,7 +3848,8 @@ MonoBehaviour:
   eventTriggerInterval: 10
   gameSpeed: 10
   startingYear: 0
-  eventQuota: 2
+  eventQuota: 5
+  minimumYearThreshold: 20
   setSpriteColor:
     m_PersistentCalls:
       m_Calls:
@@ -3971,6 +3999,21 @@ MonoBehaviour:
   milestonePanel: {fileID: 1013831410}
   title: {fileID: 480562390}
   description: {fileID: 949640379}
+  eventHandlerCallback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1074221456}
+        m_TargetAssemblyTypeName: RandomEventHandler, Assembly-CSharp
+        m_MethodName: OnMilestoneEventEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1074221460
 MonoBehaviour:
   m_ObjectHideFlags: 0

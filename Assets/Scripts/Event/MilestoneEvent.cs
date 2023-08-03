@@ -6,9 +6,18 @@ public class MilestoneEvent
 {
     private string title;
     private string description;
-    private (int Tech, int Stablity, int Explore, int Enlight, int Resource) points;
+    private PointChange points;
+
+    //  Constructors
 
     public MilestoneEvent(string title, string desc, (int, int, int, int, int) points)
+    {
+        this.title = title;
+        this.description = desc;
+        this.points = new PointChange(points);
+    }
+
+    public MilestoneEvent(string title, string desc, PointChange points)
     {
         this.title = title;
         this.description = desc;
@@ -16,7 +25,7 @@ public class MilestoneEvent
     }
 
     /// GETTER METHODS
-    public (int Tech, int Stablity, int Explore, int Enlight, int Resource) GetPointChange() { return points; }
+    public PointChange GetPointChange() { return points; }
     public string GetTitle() { return title; }
     public string GetDescription() { return description; }
 }

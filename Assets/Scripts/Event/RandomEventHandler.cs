@@ -24,6 +24,7 @@ public class RandomEventHandler : MonoBehaviour
     [SerializeField] private float gameSpeed = 2f;
     [SerializeField] private float startingYear = 0;
     [SerializeField] private int eventQuota = 3;
+    [SerializeField] private float minimumYearThreshold = 30f;
     [SerializeField] private UnityEvent<int> setSpriteColor;
     public UpdateTextEvent updateTimeText;
     public ImportantEvent milestoneEvent;
@@ -55,7 +56,11 @@ public class RandomEventHandler : MonoBehaviour
             eventTimer = 0f;
             startingYear += eventTriggerInterval;
             updateTimeText.Invoke(startingYear);
-            GambleEvent(progression.GetTechnologicalStage());
+
+            if(startingYear >= minimumYearThreshold)
+            {
+                GambleEvent(progression.GetTechnologicalStage());
+            }
         }
     }
 
@@ -87,6 +92,13 @@ public class RandomEventHandler : MonoBehaviour
     public void OnEventEnd()
     {
         eventIsOccurring = false;
+    }
+
+    public void OnMilestoneEventEnd()
+    {
+        eventIsOccurring = false;
+
+        //  TODO: end milestone event or something?
     }
 
     public bool IsEventHappening() { return eventIsOccurring; }
