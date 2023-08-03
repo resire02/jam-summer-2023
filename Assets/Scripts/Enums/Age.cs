@@ -7,7 +7,7 @@ public enum Age
 {
     Extinct,
     Prehistoric,
-    Civilization,
+    Civilizing,
     Medieval,
     Colonial,
     Industrial,

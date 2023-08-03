@@ -26,7 +26,7 @@ public static class RandomEventList
 
         //  initalize all lists
         eventList[Age.Prehistoric] = new List<ChoiceEvent>();
-        eventList[Age.Civilization] = new List<ChoiceEvent>();
+        eventList[Age.Civilizing] = new List<ChoiceEvent>();
         eventList[Age.Medieval] = new List<ChoiceEvent>();
         eventList[Age.Colonial] = new List<ChoiceEvent>();
         eventList[Age.Industrial] = new List<ChoiceEvent>();

@@ -23,6 +23,7 @@ public static class ImageLoadedRef
 
         //  TODO: add scalars here if necessary
         foregroundScale.Add("PrehistoricBase", (0.5f, 0f, 0f));
+        foregroundScale.Add("CivilizationBase", (0.5f, 0f, 0f));
     }
 
     private static void InitAgeSceneData()
@@ -31,6 +32,7 @@ public static class ImageLoadedRef
 
         //  TODO: add scene data for all ages excluding extinct
         sceneData.Add(Age.Prehistoric, ("PrehistoricWithSky", "PrehistoricBase"));
+        sceneData.Add(Age.Civilizing, ("Civilization", "CivilizationBase"));
     }
 
     //  GETTER METHODS

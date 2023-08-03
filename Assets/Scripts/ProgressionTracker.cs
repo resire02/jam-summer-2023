@@ -21,7 +21,7 @@ public class ProgressionTracker : MonoBehaviour
     private float milestoneScalar       = 1f;
 
     [SerializeField] private PointChangeEvent textSprite;       //  used to update year text
-    [SerializeField] private ImportantEvent updateSceneEvent;       //  used to update background and foreground
+    [SerializeField] private ImportantEvent updateSceneEvent;   //  used to update background and foreground
     [SerializeField] private ResourceProgressBar barTech;
     [SerializeField] private ResourceProgressBar barStab;
     [SerializeField] private ResourceProgressBar barExplore;
