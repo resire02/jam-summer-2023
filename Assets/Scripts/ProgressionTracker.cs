@@ -58,7 +58,13 @@ public class ProgressionTracker : MonoBehaviour
     //  changes progression values
     public void AdjustProgression(PointChange change)
     {        
-        textSprite.Invoke(change);
+        textSprite.Invoke(new PointChange(
+           change.technology * (int) milestoneScalar,
+           change.stability * (int) milestoneScalar,
+           change.exploration * (int) milestoneScalar,
+           change.enlightenment * (int) milestoneScalar,
+           change.abundance * (int) milestoneScalar
+        ));
 
         levelTechnology += change.technology * milestoneScalar;
         levelStability += change.stability * milestoneScalar;
