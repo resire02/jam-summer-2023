@@ -96,6 +96,20 @@ public class ProgressionTracker : MonoBehaviour
         UpdateStats();
     }
 
+    //  checks if the civilization would survive the milestone
+    public bool SurvivesMilestone(PointChange change)
+    {
+        float t = levelTechnology + change.technology * milestoneScalar;
+        float s = levelStability + change.stability * milestoneScalar;
+        float ex = levelExploration + change.exploration * milestoneScalar;
+        float en = levelEnlightenment + change.enlightenment * milestoneScalar;
+        float a = levelAbundance + change.abundance * milestoneScalar;
+
+        // Debug.Log($"Values after Milestone: {t} {s} {ex} {en} {a}");
+
+        return CheckAlive(t, s, ex, en, a);
+    }
+
     //  increments to next milestone
     public void AscendToNextMilestone()
     {
@@ -121,16 +135,22 @@ public class ProgressionTracker : MonoBehaviour
         barAbundance.SetBarValue(levelAbundance);
     }
 
-    public bool CheckIsAlive()
+    //  returns true as long as less than 3 of the levels are zeroes
+    private bool CheckAlive(float t, float s, float ex, float en, float a)
     {
         int check = 0;
 
-        if(levelTechnology == 0f) check++;
-        if(levelStability == 0f) check++;
-        if(levelExploration == 0f) check++;
-        if(levelEnlightenment == 0f) check++;
-        if(levelAbundance == 0f) check++;
+        if(t <= 0f) check++;
+        if(s <= 0f) check++;
+        if(ex <= 0f) check++;
+        if(en <= 0f) check++;
+        if(a <= 0f) check++;
 
         return check < 3;
+    }
+
+    public float CalculateScore()
+    {
+        return levelTechnology + levelStability + levelExploration + levelAbundance + levelEnlightenment;
     }
 }

@@ -19,7 +19,6 @@ public class RandomEvent : MonoBehaviour
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] private GameObject declineButton;
     [SerializeField] private PointChangeEvent handleEvent;
-    [SerializeField] private UnityEvent<int> setSpriteColor;
     [SerializeField] private AudioRequest request;
 
     private ChoiceEvent currentEvent;
@@ -78,7 +77,6 @@ public class RandomEvent : MonoBehaviour
             request.Invoke("Accept", false);
             titleText.text = "Success";
             description.text = currentEvent.contextGood;
-            setSpriteColor.Invoke(1);
             handleEvent.Invoke(currentEvent.resultGood);
             GetComponent<SpriteGenerator>().AddToScene(new CustomSprite("PrehistoricBaseWithLogWithFire", 1000f, 500f, 0.5f));
         }
@@ -88,7 +86,6 @@ public class RandomEvent : MonoBehaviour
             request.Invoke("Decline", false);
             titleText.text = "Failure";
             description.text = currentEvent.contextBad;
-            setSpriteColor.Invoke(0);
             handleEvent.Invoke(currentEvent.resultBad);
         }
 

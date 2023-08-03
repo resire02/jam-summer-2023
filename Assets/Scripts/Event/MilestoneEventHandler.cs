@@ -10,8 +10,8 @@ public class MilestoneEventHandler : MonoBehaviour
     [SerializeField] private GameObject milestonePanel;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI description;
-    [SerializeField] private GameObject gameEndPanel;
     [SerializeField] private UnityEvent eventHandlerCallback;
+    [SerializeField] private UnityEvent<float> onGameEnd;
 
     private Dictionary<Age, (string, string)> milestoneSceneData;
     private ProgressionTracker progression;
@@ -29,7 +29,6 @@ public class MilestoneEventHandler : MonoBehaviour
 
     public void Reset()
     {
-        gameEndPanel.SetActive(false);
         milestonePanel.SetActive(false);
     }
 
@@ -39,6 +38,7 @@ public class MilestoneEventHandler : MonoBehaviour
         milestoneSceneData.Add(Age.Prehistoric, ("MilestonePlaceholder", "none"));
     }
 
+    //  used to retrieve milestone scene data
     private (string, string) GetMilestoneSceneData(Age age)
     {
         if(!milestoneSceneData.ContainsKey(age)) return ("MilestonePlaceholder", "none");
@@ -46,10 +46,9 @@ public class MilestoneEventHandler : MonoBehaviour
         return milestoneSceneData[age];
     }
 
+    //  used to setup the milestone scene
     public void TriggerMilestoneEvent(Age age)
     {
-        // Debug.Log("Triggered Milestone Event");
-
         //  set background and foreground scene
         (string bg, string fg) scene = GetMilestoneSceneData(age);
         imgLd.SetScene(scene.bg, scene.fg);
@@ -60,18 +59,18 @@ public class MilestoneEventHandler : MonoBehaviour
         UpdateText();
     }
 
+    //  handles milestone event flow
     public void HandleMilestone()
     {
         // Debug.Log("Pressed Button");
 
-        //  TODO: write custom function to handle milestone events
-        progression.AdjustProgression(milestoneEvent.GetPointChange());
-
-        if(progression.CheckIsAlive())
+        //  check if civilization survives
+        if(progression.SurvivesMilestone(milestoneEvent.GetPointChange()))
         {
+            //  progress milestone
             progression.AscendToNextMilestone();
 
-            //  TODO: play sound or animation or something?
+            //  handle event end
             eventHandlerCallback.Invoke();
 
             //  hide milestone panel after clicking
@@ -79,11 +78,13 @@ public class MilestoneEventHandler : MonoBehaviour
         }
         else
         {
-            gameEndPanel.SetActive(true);
+            //  display end panel
+            onGameEnd.Invoke(progression.CalculateScore());
         }
 
     }
 
+    //  updates milestone panel text
     private void UpdateText()
     {
         title.text = milestoneEvent.GetTitle();
