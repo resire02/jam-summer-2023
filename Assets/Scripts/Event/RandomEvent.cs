@@ -21,6 +21,7 @@ public class RandomEvent : MonoBehaviour
     [SerializeField] private PointChangeEvent handleEvent;
     [SerializeField] private AudioRequest request;
 
+    private SpriteGenerator generator;
     private ChoiceEvent currentEvent;
     private RandomEventHandler handler;
     private Animator animator;
@@ -31,6 +32,7 @@ public class RandomEvent : MonoBehaviour
         //  retrieve animator and handler
         handler = GetComponent<RandomEventHandler>();
         animator = eventBar.GetComponent<Animator>();
+        generator = GetComponent<SpriteGenerator>();
     }
 
     //  draws a random event from the event pool
@@ -78,7 +80,7 @@ public class RandomEvent : MonoBehaviour
             titleText.text = "Success";
             description.text = currentEvent.contextGood;
             handleEvent.Invoke(currentEvent.resultGood);
-            GetComponent<SpriteGenerator>().AddToScene(new CustomSprite("PrehistoricBaseWithLogWithFire", 1000f, 500f, 0.5f));
+            generator.AddToScene(currentEvent.eventID);
         }
         else
         {
