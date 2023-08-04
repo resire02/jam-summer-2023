@@ -35,6 +35,8 @@ public class AudioHandler : MonoBehaviour
 
     private bool CreateNewSource(string soundID)
     {
+        if(audioIndex == null) Start();
+        
         if(audioIndex.ContainsKey(soundID)) return false;
 
         AudioSource source = transform.gameObject.AddComponent<AudioSource>() as AudioSource;
