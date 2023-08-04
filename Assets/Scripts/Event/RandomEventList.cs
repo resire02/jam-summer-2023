@@ -16,7 +16,8 @@ public static class RandomEventList
         "Bad Description", 
         (1, 1, 1, 1, 1), 
         (-1, -1, -1, -1, -1), 
-        2
+        2,
+        -1
     );
 
     //  must be called before usingSelectRandomEvent!
@@ -73,50 +74,12 @@ public static class RandomEventList
 
         //  WARNING: YANDERE DEV LEVEL CODE UP AHEAD, PROCEED AT YOUR OWN RISK!
 
-        if(!File.Exists(filepath)) return;
-
-        Age age;
-        int chance;
-        string title, desc, goodTxt, badTxt;
-        PointChange good, bad;
-
         foreach(string line in File.ReadLines(filepath))
         {
-            if(line.Length == 0) continue;
-            string[] data = line.Split('|');
-            if(data.Length != 8) throw new ArgumentException("Insufficient or Invalid Data");
-            age = (Age) int.Parse(data[0]);
-            title = data[1];
-            desc = data[2];
-            goodTxt = data[3];
-            badTxt = data[4];
-            good = ParsePointChange(data[5]);
-            bad = ParsePointChange(data[6]);
-            chance = int.Parse(data[7]);
-
-            eventList[age].Add(new ChoiceEvent(
-                (title, desc),
-                goodTxt,
-                badTxt,
-                good,
-                bad,
-                chance
-            ));
+            if(line[0] != '{') continue;
+            ChoiceEventSerializable c = JsonUtility.FromJson<ChoiceEventSerializable>(line);
+            ChoiceEvent ce = c.DeserializeObject();
+            eventList[(Age) c.age].Add(ce);
         }
     }
-
-    private static PointChange ParsePointChange(string data)
-    {
-        string[] nums = data.Split(',');
-        int t, s, e, en, a;
-
-        t = int.Parse(nums[0]);
-        s = int.Parse(nums[1]);
-        e = int.Parse(nums[2]);
-        en = int.Parse(nums[3]);
-        a = int.Parse(nums[4]);
-
-        return new PointChange(t, s, e, en, a);
-    }
-
 }

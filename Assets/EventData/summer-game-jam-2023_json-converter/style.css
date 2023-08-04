@@ -1,0 +1,16 @@
+.number-input {
+    display: flex;
+    padding-top: 0;
+    padding-bottom: 0;
+    column-gap: 20px;
+    align-items: center;
+}
+
+.number-input input {
+    width: 50px;
+    height: fit-content;
+}
+
+form *:invalid {
+    background-color: red;
+}

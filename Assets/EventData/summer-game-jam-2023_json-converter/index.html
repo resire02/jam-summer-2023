@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./style.css">
+        <title>
+            Convert Random Event Into Json
+        </title>
+    </head>
+    <body>
+        <form id="event-form" method="none">
+            <h1>Input Random Event Here!</h1>
+            <div>
+                <span>
+                    <p>Event Title</p>
+                    <input type="text" required name="title" id="title">
+                </span>
+                <span>
+                    <p>Age</p>
+                    <p>Prehistoric = 1, Singularity = 10</p>
+                    <input type="number" required name="age" id="age">
+                </span>
+                <span>
+                    <p>Event Description</p>
+                    <textarea   cols="50" rows="10" required name="description" id="description"></textarea>
+                </span>
+            </div>
+            <div>
+                <h1>Good Senario Details</h1>
+                <span>
+                    <p>Good Context</p>
+                    <textarea   cols="50" rows="10" required name="contextGood" id="contextGood"></textarea>
+                </span>
+                <span class="number-input">
+                    <p>Tech</p>
+                    <input type"number" required name="goodTechnology" id="goodTechnology">
+                    <p>Stability</p>
+                    <input type"number" required name="goodStability" id="goodStability">
+                    <p>Explore</p>
+                    <input type"number" required name="goodExploration" id="goodExploration">
+                    <p>Enlight</p>
+                    <input type"number" required name="goodEnlightenment" id="goodEnlightenment">
+                    <p>Abundance</p>
+                    <input type"number" required name="goodAbundance" id="goodAbundance">
+                </span>
+            </div>
+            <div>
+                <h1>Bad Senario Details</h1>
+                <span>
+                    <p>Bad Context</p>
+                    <textarea   cols="50" rows="10" required name="contextBad" id="contextBad"></textarea>
+                </span>
+                <span class="number-input">
+                    <p>Tech</p>
+                    <input type"number" required name="badTechnology" id="badTechnology">
+                    <p>Stability</p>
+                    <input type"number" required name="badStability" id="badStability">
+                    <p>Explore</p>
+                    <input type"number" required name="badExploration" id="badExploration">
+                    <p>Enlight</p>
+                    <input type"number" required name="badEnlightenment" id="badEnlightenment">
+                    <p>Abundance</p>
+                    <input type"number" required name="badAbundance" id="badAbundance">
+                </span>
+            </div>
+            <div>
+                <h1>Other Details</h1>
+                <span>
+                    <p>Event Probability</p>
+                    <input type="number" required value="2" name="chance" id="chance">
+                </span>
+                <span>
+                    <p>Event ID</p>
+                    <input type="number" required value="-1" name="eventID" id="eventID">
+                </span>
+            </div>
+            <div>
+                <button action="submit" id="submit-button">
+                    Generate JSON
+                </button>
+                <input type="reset">
+            </div>
+            <div>
+                <textarea   id="result" cols="30" rows="10"></textarea>
+            </div>
+        </form>
+        <script src="./script.js"></script>
+    </body>
+</html>

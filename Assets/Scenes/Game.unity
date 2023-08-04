@@ -2421,6 +2421,7 @@ MonoBehaviour:
   arrowContainer: {fileID: 681956685}
   upArrow: {fileID: 21300000, guid: 16d7690bd17c68e45aa7d7d048f9c7f1, type: 3}
   downArrow: {fileID: 21300000, guid: 7207cb7e5e071ee479956328fadebfd9, type: 3}
+  noChangeSprite: {fileID: 21300000, guid: 17c8ce7bf86d9c14986696f4e47a3524, type: 3}
 --- !u!1 &734438862
 GameObject:
   m_ObjectHideFlags: 0

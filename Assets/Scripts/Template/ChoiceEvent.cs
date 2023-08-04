@@ -11,6 +11,7 @@ public class ChoiceEvent
     public string contextGood;
     public string contextBad;
     private int chance;
+    public int eventID;
 
     /// *** CONSTRUCTOR MAYHEM  *** ///
 
@@ -22,6 +23,7 @@ public class ChoiceEvent
         contextGood = "Success Description";
         contextBad = "Failure Description";
         chance = 2;
+        eventID = -1;
     }
 
     public ChoiceEvent(
@@ -30,7 +32,8 @@ public class ChoiceEvent
         string badText,
         (int, int, int, int, int) good,
         (int, int, int, int, int) bad,
-        int prob) : this()
+        int prob,
+        int id) : this()
     {
         eventContext = context;
         contextGood = goodText;
@@ -38,6 +41,7 @@ public class ChoiceEvent
         resultGood = new PointChange(good);
         resultBad = new PointChange(bad);
         chance = prob;
+        eventID = id;
     }
 
     public ChoiceEvent(
@@ -46,7 +50,8 @@ public class ChoiceEvent
         string badText,
         PointChange good,
         PointChange bad,
-        int prob) : this()
+        int prob,
+        int id) : this()
     {
         eventContext = context;
         contextGood = goodText;
@@ -54,6 +59,12 @@ public class ChoiceEvent
         resultGood = good;
         resultBad = bad;
         chance = prob;
+        eventID = id;
+    }
+
+    public override string ToString()
+    {
+        return eventContext.title;
     }
 
     //  a chance value of `2` means the chance of success is 1 in 2 (50%)

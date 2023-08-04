@@ -9,6 +9,7 @@ public class VisualChange : MonoBehaviour
     [SerializeField] private GameObject arrowContainer;
     [SerializeField] private Sprite upArrow;
     [SerializeField] private Sprite downArrow;
+    [SerializeField] private Sprite noChangeSprite;
 
     private List<Image> arrowImages;
     private Animator animator;
@@ -37,11 +38,11 @@ public class VisualChange : MonoBehaviour
 
     private void SetVisualIndicators(PointChange change)
     {
-        arrowImages[0].sprite = (change.technology >= 0) ? upArrow : downArrow;
-        arrowImages[1].sprite = (change.stability >= 0) ? upArrow : downArrow;
-        arrowImages[2].sprite = (change.exploration >= 0) ? upArrow : downArrow;
-        arrowImages[3].sprite = (change.enlightenment >= 0) ? upArrow : downArrow;
-        arrowImages[4].sprite = (change.abundance >= 0) ? upArrow : downArrow;
+        arrowImages[0].sprite = (change.technology == 0f) ? noChangeSprite : (change.technology > 0f) ? upArrow : downArrow;
+        arrowImages[1].sprite = (change.stability == 0f) ? noChangeSprite : (change.stability > 0f) ? upArrow : downArrow;
+        arrowImages[2].sprite = (change.exploration == 0f) ? noChangeSprite : (change.exploration > 0f) ? upArrow : downArrow;
+        arrowImages[3].sprite = (change.enlightenment == 0f) ? noChangeSprite : (change.enlightenment > 0f) ? upArrow : downArrow;
+        arrowImages[4].sprite = (change.abundance == 0f) ? noChangeSprite : (change.abundance > 0f) ? upArrow : downArrow;
     }
 
 }

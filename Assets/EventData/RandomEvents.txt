@@ -1,1 +1,1 @@
-1|Someone has an idea|A member of your tribe want to try to rub sticks together|Your member created fire!|Nothing happened and you lost your sticks|2,0,0,1,1|0,-1,0,0,-2|2
+{"goodTechnology":"324","goodStability":"342","goodExploration":"3","goodEnlightenment":"324","goodAbundance":"432","badTechnology":"4324","badStability":"324","badExploration":"423432","badEnlightenment":"32324","badAbundance":"432342","chance":"2","eventID":"-1","title":"dsfsdzfds","description":"sdfsdfds","contextGood":"asdfsedf","contextBad":"fghbdhfghftgh","age":"1"}

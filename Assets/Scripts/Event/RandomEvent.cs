@@ -73,7 +73,7 @@ public class RandomEvent : MonoBehaviour
 
         if(currentEvent.GambleSuccess())
         {
-            Debug.Log("Sucessful Event Triggered");
+            // Debug.Log("Sucessful Event Triggered");
             request.Invoke("Accept", false);
             titleText.text = "Success";
             description.text = currentEvent.contextGood;
@@ -82,7 +82,7 @@ public class RandomEvent : MonoBehaviour
         }
         else
         {
-            Debug.Log("Failure Event Triggered");
+            // Debug.Log("Failure Event Triggered");
             request.Invoke("Decline", false);
             titleText.text = "Failure";
             description.text = currentEvent.contextBad;
@@ -90,6 +90,7 @@ public class RandomEvent : MonoBehaviour
         }
 
         outcomeOccurred = true;
+
     }
 
     //  for decline button functionality
