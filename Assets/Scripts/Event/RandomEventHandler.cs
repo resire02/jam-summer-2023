@@ -34,6 +34,7 @@ public class RandomEventHandler : MonoBehaviour
     private RandomEvent randomEvent;
     private int eventCount = 0;
     private ProgressionTracker progression;
+    [SerializeField] private AudioHandler request;
     
     private void Start()
     {
@@ -41,6 +42,7 @@ public class RandomEventHandler : MonoBehaviour
         randomEvent = GetComponent<RandomEvent>();
         progression = GetComponent<ProgressionTracker>();
         RandomEventList.Init();
+        request.PlaySound("Game", true);
     }
 
     public void Reset()
