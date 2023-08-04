@@ -13,6 +13,7 @@ public class VisualChange : MonoBehaviour
 
     private List<Image> arrowImages;
     private Animator animator;
+    private ProgressionTracker Age; 
 
     private void Start()
     {
@@ -44,5 +45,9 @@ public class VisualChange : MonoBehaviour
         arrowImages[3].sprite = (change.enlightenment == 0f) ? noChangeSprite : (change.enlightenment > 0f) ? upArrow : downArrow;
         arrowImages[4].sprite = (change.abundance == 0f) ? noChangeSprite : (change.abundance > 0f) ? upArrow : downArrow;
     }
-
+    private void AddCenteredText(Transform parentTransform)
+    {
+        GameObject textObject = new GameObject("Text");
+        textObject.transform.SetParent(parentTransform, false);
+    }
 }
