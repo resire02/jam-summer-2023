@@ -1,16 +1,99 @@
-.number-input {
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+  }
+  
+  h1 {
+    margin-top: 0;
+  }
+  
+  form {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  form > div {
+    margin-bottom: 20px;
+  }
+  
+  form > div > h1 {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  form > div > span {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  form > div > span > p {
+    margin: 5px 0;
+  }
+  
+  form input[type="text"],
+  form input[type="number"],
+  form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  form textarea {
+    resize: vertical;
+  }
+  
+  .number-input {
     display: flex;
-    padding-top: 0;
-    padding-bottom: 0;
-    column-gap: 20px;
-    align-items: center;
-}
-
-.number-input input {
-    width: 50px;
-    height: fit-content;
-}
-
-form *:invalid {
-    background-color: red;
-}
+    flex-wrap: wrap;
+  }
+  
+  .number-input > p {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .number-input > input {
+    flex: 1;
+    margin: 5px;
+  }
+  
+  form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background-color: #45a049;
+  }
+  
+  form input[type="reset"] {
+    margin-left: 10px;
+  }
+  
+  #result,
+  #json-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+  }
+  
+  #json-input {
+    margin-top: 20px;
+  }
+  
+  #error-msg {
+    color: red;
+  }
+  
+  

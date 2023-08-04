@@ -72,10 +72,6 @@
                     <p>Event ID</p>
                     <input type="number" required value="-1" name="eventID" id="eventID">
                 </span>
-                <span>
-                    <p>File Path</p>
-                    <textarea   cols="40" rows="5" required name="filePath" id="filePath"></textarea>
-                </span>
             </div>
             <div>
                 <button action="submit" id="submit-button">
@@ -86,6 +82,13 @@
             <div>
                 <textarea   id="result" cols="30" rows="10"></textarea>
             </div>
+
+            <div>
+                <h1>Input Existing JSON Format Here!</h1>
+                <textarea id="json-input" cols="50" rows="10"></textarea>
+                <button onclick="populateFromJson()">Populate From JSON</button>
+            </div>
+             
         </form>
         <script src="./script.js"></script>
     </body>
