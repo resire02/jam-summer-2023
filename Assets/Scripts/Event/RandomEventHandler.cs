@@ -22,7 +22,7 @@ public class RandomEventHandler : MonoBehaviour
     [SerializeField] private int eventProbability = 7;
     [SerializeField] private float eventTriggerInterval = 10f;
     [SerializeField] private float gameSpeed = 2f;
-    [SerializeField] private float startingYear = 0;
+    [SerializeField] public float startingYear = 0;
     [SerializeField] private int eventQuota = 3;
     [SerializeField] private float minimumYearThreshold = 30f;
     
@@ -117,5 +117,5 @@ public class RandomEventHandler : MonoBehaviour
     }
 
     public bool IsEventHappening() { return eventIsOccurring; }
-
+    public float GetYear() { return startingYear; }
 }

@@ -7,6 +7,7 @@ public class GameEndMenu : MonoBehaviour
 {
     [SerializeField] private GameObject gameLogic;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI yearText;
 
     private void Start()
     {
@@ -18,6 +19,7 @@ public class GameEndMenu : MonoBehaviour
     {
         transform.gameObject.SetActive(true);
         scoreText.text = $"Civilization Score: {score}";
+        yearText.text = $"Civilizaton Lasted: {gameLogic.GetComponent<RandomEventHandler>().GetYear()} Years";
     }
 
     public void ResetGame()
