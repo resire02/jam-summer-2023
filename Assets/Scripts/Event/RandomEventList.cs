@@ -76,10 +76,15 @@ public static class RandomEventList
 
         foreach(string line in File.ReadLines(filepath))
         {
-            if(line[0] != '{') continue;
+            if(line.Length <= 0 || line[0] != '{') continue;
             ChoiceEventSerializable c = JsonUtility.FromJson<ChoiceEventSerializable>(line);
             ChoiceEvent ce = c.DeserializeObject();
             eventList[(Age) c.age].Add(ce);
+        }
+
+        foreach(Age age in eventList.Keys)
+        {
+            Debug.Log($"{age} contains {eventList[age].Count} elements!");
         }
     }
 }

@@ -123,6 +123,18 @@ public class ProgressionTracker : MonoBehaviour
 
         //  update scene
         updateSceneEvent.Invoke(currentStage);
+
+        //  update bar max
+        SetBarMax();
+    }
+
+    private void SetBarMax()
+    {
+        barTech.SetBarMax(milestoneScalar * 100f);
+        barStab.SetBarMax(milestoneScalar * 100f);
+        barExplore.SetBarMax(milestoneScalar * 100f);
+        barEnlight.SetBarMax(milestoneScalar * 100f);
+        barAbundance.SetBarMax(milestoneScalar * 100f);
     }
 
     //  updates resource bar values on resource tab

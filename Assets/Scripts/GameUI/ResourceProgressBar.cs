@@ -45,5 +45,6 @@ public class ResourceProgressBar : MonoBehaviour
     public float GetBarValue() { return barValue; }
     public void SetBarValue(float value) { barValue = value; }
     public float GetBarMax() { return barMax; }
+    public void SetBarMax(float max) { barMax = max; }
 
 }

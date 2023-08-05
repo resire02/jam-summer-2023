@@ -4518,9 +4518,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventProbability: 5
   eventTriggerInterval: 10
-  gameSpeed: 10
+  gameSpeed: 5
   startingYear: 0
-  eventQuota: 7
+  eventQuota: 5
   minimumYearThreshold: 20
   updateTimeText:
     m_PersistentCalls:
