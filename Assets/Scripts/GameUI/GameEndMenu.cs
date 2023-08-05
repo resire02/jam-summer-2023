@@ -11,6 +11,7 @@ public class GameEndMenu : MonoBehaviour
     private void Start()
     {
         transform.gameObject.SetActive(false);
+        RandomEventList.InitializeAllEvents();
     }
 
     public void TriggerGameEnd(float score)

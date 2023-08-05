@@ -60,7 +60,7 @@ public static class RandomEventList
     }
 
     //  populates eventList with events
-    private static void InitializeAllEvents()
+    public static void InitializeAllEvents()
     {
         //  TODO: add all events here
         // eventList[Age.Prehistoric].Add(new ChoiceEvent(
