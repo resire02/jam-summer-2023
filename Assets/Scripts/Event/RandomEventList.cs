@@ -55,22 +55,17 @@ public static class RandomEventList
         int index = UnityEngine.Random.Range(0, list.Count);
         ChoiceEvent choice = list[index];
         list.RemoveAt(index);
-        Debug.Log($"Length Modified: {list.Count}");
+        // Debug.Log($"Length Modified: {list.Count}");
         return choice;
     }
 
     //  populates eventList with events
     public static void InitializeAllEvents()
     {
-        //  TODO: add all events here
-        // eventList[Age.Prehistoric].Add(new ChoiceEvent(
-        //     ("Someone has an idea", "A member of your tribe want to try to rub sticks together"),
-        //     "Your member created fire!",
-        //     "Nothing happened and you lost your sticks",
-        //     (2, 0, 0, 1, 1),
-        //     (0, -1, 0, 0, -2),
-        //     2
-        // ));
+        foreach(Age age in eventList.Keys)
+        {
+            eventList[age].Clear();
+        }
 
         //  WARNING: YANDERE DEV LEVEL CODE UP AHEAD, PROCEED AT YOUR OWN RISK!
 
@@ -82,9 +77,9 @@ public static class RandomEventList
             eventList[c.GetAge()].Add(ce);
         }
 
-        // foreach(Age age in eventList.Keys)
-        // {
-        //     Debug.Log($"{age} contains {eventList[age].Count} elements!");
-        // }
+        foreach(Age age in eventList.Keys)
+        {
+            Debug.Log($"{age} contains {eventList[age].Count} elements!");
+        }
     }
 }
