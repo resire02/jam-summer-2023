@@ -40,9 +40,9 @@ public class GameEndMenu : MonoBehaviour
         gameLogic.GetComponent<RandomEventHandler>().Reset();
         gameLogic.GetComponent<MilestoneEventHandler>().Reset();
 
-        RandomEventList.InitializeAllEvents();
         music.PlaySound("Game", true);
         music.StopSound("End");
         gameOverMenu.SetActive(false);
+        RandomEventList.InitializeAllEvents();
     }
 }

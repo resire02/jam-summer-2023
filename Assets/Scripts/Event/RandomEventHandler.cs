@@ -41,8 +41,10 @@ public class RandomEventHandler : MonoBehaviour
         updateTimeText.Invoke(startingYear);
         randomEvent = GetComponent<RandomEvent>();
         progression = GetComponent<ProgressionTracker>();
-        RandomEventList.Init();
         request.PlaySound("Game", true);
+        
+        //  this can silently fail
+        RandomEventList.Init();
     }
 
     public void Reset()
