@@ -49,25 +49,25 @@ public static class MilestoneEventList
             (-10, -10, -10, -10, -10)
         ));
 
-        milestoneList.Add(Age.Space, new MilestoneEventList(
+        milestoneList.Add(Age.Space, new MilestoneEvent(
             "Solar Flare",
             "A massive surge of radiation shoots out from the Sun in every direction, vaporizing every object upon contact and engulfing the planets in an unforgiving solar storm.",
             (-10, -10, -10, -10, -10)
         ));
 
-        milestoneList.Add(Age.Galactic, new MilestoneEventList(
+        milestoneList.Add(Age.Galactic, new MilestoneEvent(
             "Supernova",
             "A set of unstable stars collapse, sending an unimaginably destructive shock wave rippling through the galaxy.",
             (-10, -10, -10, -10, -10)
         ));
 
-        milestoneList.Add(Age.Cosmic, new MilestoneEventList(
+        milestoneList.Add(Age.Cosmic, new MilestoneEvent(
             "Supermassive Blackhole",
             "At the core of the universe, a supermassive blackhole awaits and beckons all those who dare approach to test their courage. However, it's not waiting anymore.",
             (-10, -10, -10, -10, -10)
         ));
 
-        milestoneList.Add(Age.Singularity, new MilestoneEventList(
+        milestoneList.Add(Age.Singularity, new MilestoneEvent(
             "The Great Filter",
             "Those that begin must have an end.",
             (-10, -10, -10, -10, -10)
