@@ -85,7 +85,7 @@ public class RandomEventHandler : MonoBehaviour
             //  maybe adjust point gain here?
             if(startingYear % 50 == 0)
             {
-                progression.AdjustProgression(new PointChange(1, 1, 1, 1, 1));
+                progression.AdjustProgression(new PointChange(5, 5, 5, 5, 5));
             }
             
             return;
