@@ -67,6 +67,8 @@ public class MilestoneEventHandler : MonoBehaviour
         //  check if civilization survives
         if(progression.SurvivesMilestone(milestoneEvent.GetPointChange()))
         {
+            progression.AdjustProgression(milestoneEvent.GetPointChange());
+            
             //  progress milestone
             progression.AscendToNextMilestone();
 
