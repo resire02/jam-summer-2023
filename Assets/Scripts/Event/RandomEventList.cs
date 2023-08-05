@@ -79,12 +79,12 @@ public static class RandomEventList
             if(line.Length <= 0 || line[0] != '{') continue;
             ChoiceEventSerializable c = JsonUtility.FromJson<ChoiceEventSerializable>(line);
             ChoiceEvent ce = c.DeserializeObject();
-            eventList[(Age) c.age].Add(ce);
+            eventList[c.GetAge()].Add(ce);
         }
 
-        foreach(Age age in eventList.Keys)
-        {
-            Debug.Log($"{age} contains {eventList[age].Count} elements!");
-        }
+        // foreach(Age age in eventList.Keys)
+        // {
+        //     Debug.Log($"{age} contains {eventList[age].Count} elements!");
+        // }
     }
 }

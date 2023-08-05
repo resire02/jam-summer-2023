@@ -62,10 +62,10 @@ public class MilestoneEventHandler : MonoBehaviour
     //  handles milestone event flow
     public void HandleMilestone()
     {
-        // Debug.Log("Pressed Button");
+        Debug.Log("Pressed Button");
 
         //  check if civilization survives
-        if(progression.SurvivesMilestone(milestoneEvent.GetPointChange()))
+        if(progression.SurvivesMilestone(milestoneEvent.GetPointChange()) && progression.GetTechnologicalStage() != Age.Singularity)
         {
             progression.AdjustProgression(milestoneEvent.GetPointChange());
             

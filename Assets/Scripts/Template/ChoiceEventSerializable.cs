@@ -42,5 +42,10 @@ public class ChoiceEventSerializable
             eventID
         );
     }
+
+    public Age GetAge()
+    {
+        return (Age) age;
+    }
 }
 

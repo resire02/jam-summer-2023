@@ -5,19 +5,23 @@ using TMPro;
 
 public class GameEndMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject gameLogic;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI yearText;
+    [SerializeField] private AudioHandler music;
 
     private void Start()
     {
-        transform.gameObject.SetActive(false);
+        gameOverMenu.SetActive(false);
         RandomEventList.InitializeAllEvents();
     }
 
     public void TriggerGameEnd(float score)
     {
-        transform.gameObject.SetActive(true);
+        gameOverMenu.SetActive(true);
+        music.PlaySound("End", true);
+        music.StopSound("Game");
         scoreText.text = $"Civilization Score: {score}";
         yearText.text = $"Civilizaton Lasted: {gameLogic.GetComponent<RandomEventHandler>().GetYear()} Years";
     }
@@ -30,6 +34,8 @@ public class GameEndMenu : MonoBehaviour
         gameLogic.GetComponent<RandomEventHandler>().Reset();
         gameLogic.GetComponent<MilestoneEventHandler>().Reset();
 
-        transform.gameObject.SetActive(false);
+        music.PlaySound("Game", true);
+        music.StopSound("End");
+        gameOverMenu.SetActive(false);
     }
 }
