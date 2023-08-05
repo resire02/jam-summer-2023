@@ -23,15 +23,39 @@ const age = document.getElementById("age");
 
 const result = document.getElementById("result");
 
+let importingJSON = false;
+const jsonFilesTextarea = document.getElementById("json-files");
+
 form.onsubmit = e => {
     console.log(desc.value);
-    result.value = GenerateJson().replace('\n','');
+    importingJSON = false; // Reset the flag before generating JSON
+    const jsonData = GenerateJson().replace('\n','');
+    result.value = jsonData;
+    addJSONToTextArea(jsonData);
     e.preventDefault();
 }
 
 function populateFromJson() {
     const jsonInput = document.getElementById("json-input");
-    parseAndPopulate(jsonInput.value);
+    const jsonData = jsonInput.value.trim();
+    if (jsonData) {
+        try {
+            importingJSON = true; // Set the flag to true before adding the JSON data to form fields
+            const jsonFormats = jsonData.split('\n');
+            jsonFormats.forEach(json => {
+                const formattedJson = json.trim();
+                if (formattedJson) {
+                    parseAndPopulate(formattedJson);
+                    // Add each imported JSON to the textarea (no duplicates)
+                    if (!jsonFilesTextarea.value.includes(formattedJson)) {
+                        addJSONToTextArea(formattedJson);
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("Invalid JSON format:", error);
+        }
+    }
 }
 
 function parseAndPopulate(json) {
@@ -62,4 +86,12 @@ function parseAndPopulate(json) {
 function GenerateJson()
 {
     return `{"goodTechnology":"${gT.value}","goodStability":"${gS.value}","goodExploration":"${gEx.value}","goodEnlightenment":"${gEn.value}","goodAbundance":"${gA.value}","badTechnology":"${bT.value}","badStability":"${bS.value}","badExploration":"${bEx.value}","badEnlightenment":"${bEn.value}","badAbundance":"${bA.value}","chance":"${chance.value}","eventID":"${id.value}","title":"${title.value}","description":"${desc.value}","contextGood":"${cG.value}","contextBad":"${cB.value}","age":"${age.value}"}`;
+}
+
+function addJSONToTextArea(jsonData) {
+    const jsonFilesTextarea = document.getElementById("json-files");
+    const existingData = jsonFilesTextarea.value;
+    if (!existingData.includes(jsonData)) {
+        jsonFilesTextarea.value += jsonData + '\n';
+    }
 }
