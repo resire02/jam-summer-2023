@@ -23,7 +23,7 @@ public static class ImageLoadedRef
 
         //  TODO: add scalars here if necessary
         foregroundScale.Add("PrehistoricBase", (0.5f, 0f, 0f));
-        foregroundScale.Add("CivilizationBase", (0.5f, 0f, 0f));
+        
     }
 
     private static void InitAgeSceneData()
@@ -33,14 +33,14 @@ public static class ImageLoadedRef
         //  TODO: add scene data for all ages excluding extinct
         sceneData.Add(Age.Prehistoric, ("PrehistoricWithSky", "PrehistoricBase"));
         sceneData.Add(Age.Civilizing, ("Civilization", "CivilizationBase"));
-        //sceneData.Add(Age.Medieval, ("Medieval", "Medieval"));
-        // sceneData.Add(Age.Colonial, ("Colonial", "Colonial"));
-        // sceneData.Add(Age.Industrial, ("Industrial", "Industrial"));
-        // sceneData.Add(Age.Information, ("Information", "Information"));
+        sceneData.Add(Age.Medieval, ("Medieval", "Medieval"));
+        sceneData.Add(Age.Colonial, ("Colonial", "Colonial"));
+        sceneData.Add(Age.Industrial, ("Industrial", "Industrial"));
+        sceneData.Add(Age.Information, ("Information", "Information"));
         sceneData.Add(Age.Space, ("Space", "Space"));
         sceneData.Add(Age.Cosmic, ("Cosmic", "Cosmic"));
-        //sceneData.Add(Age.Galactic, ("Galactic", "Galactic"));
-        //sceneData.Add(Age.Singularity, ("Singularity", "Singularity"));
+        sceneData.Add(Age.Galactic, ("Galactic", "Galactic"));
+        sceneData.Add(Age.Singularity, ("Singularity", "Singularity"));
 
     }
 
