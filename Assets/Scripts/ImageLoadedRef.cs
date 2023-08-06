@@ -48,6 +48,8 @@ public static class ImageLoadedRef
 
     private static void InitMilestoneData()
     {
+        if(milestoneData.Count > 0) return;
+
         milestoneData.Add(Age.Prehistoric, ("PrehistoricMilestone", "none"));
         milestoneData.Add(Age.Civilizing, ("CivilizingMilestone", "none"));
         milestoneData.Add(Age.Medieval, ("MedievalMilestone", "none"));
