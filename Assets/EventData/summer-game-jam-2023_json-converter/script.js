@@ -188,6 +188,7 @@ function exportJSON() {
     const spaceData = document.getElementById("space-events").value.trim();
     const galacticData = document.getElementById("galactic-events").value.trim();
     const cosmicData = document.getElementById("cosmic-events").value.trim();
+    const singularityData = document.getElementById("singularity-events").value.trim();
 
     let exportedData = "";
 
@@ -225,6 +226,9 @@ function exportJSON() {
 
     if (cosmicData !== "") {
         exportedData += "Cosmic Events:\n" + cosmicData + "\n\n";
+    }
+    if (singularityData !== "") {
+        exportedData += "Singularity Events:\n" + singularityData + "\n\n";
     }
 
     const blob = new Blob([exportedData], { type: "text/plain;charset=utf-8" });

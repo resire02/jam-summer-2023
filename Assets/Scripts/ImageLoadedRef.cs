@@ -33,6 +33,8 @@ public static class ImageLoadedRef
         //  TODO: add scene data for all ages excluding extinct
         sceneData.Add(Age.Prehistoric, ("PrehistoricWithSky", "PrehistoricBase"));
         sceneData.Add(Age.Civilizing, ("Civilization", "CivilizationBase"));
+        sceneData.Add(Age.Space, ("Space", "Space"));
+
     }
 
     //  GETTER METHODS
