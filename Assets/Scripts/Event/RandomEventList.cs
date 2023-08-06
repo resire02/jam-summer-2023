@@ -8,7 +8,7 @@ using System.Text;
 //  Handles random selection of events
 public static class RandomEventList
 {
-    private static readonly string filepath = $"{Application.dataPath}/EventData/RandomEvents.txt";
+    private static readonly string filepath = $"{Application.streamingAssetsPath}/RandomEvents.txt";
     private static Dictionary<Age,List<ChoiceEvent>> eventList = new Dictionary<Age,List<ChoiceEvent>>();
     private static readonly ChoiceEvent DEFAULT = new ChoiceEvent(
         ("Event Title", "Event Description"), 
@@ -23,6 +23,8 @@ public static class RandomEventList
     //  must be called before usingSelectRandomEvent!
     public static void Init()
     {
+        // Debug.Log(Application.streamingAssetsPath);
+
         if(eventList.Count > 0) return;
 
         //  initalize all lists
