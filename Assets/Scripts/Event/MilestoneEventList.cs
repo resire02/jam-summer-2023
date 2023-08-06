@@ -28,43 +28,43 @@ public static class MilestoneEventList
         milestoneList.Add(Age.Medieval, new MilestoneEvent(
             "Plague of Death",
             "The towns surrounding the castle have grown bleak, the people withering away. A mysterious plague sweeps the land, the people drop as the years toil.",
-            (-10, -10, -10, -10, -10)
+            (-15, -15, -15, -15, -15)
         ));
 
         milestoneList.Add(Age.Colonial, new MilestoneEvent(
             "Hypercane",
             "A mighty breeze followed by a stronger breeze, the vegetation is uprooted as the towns are blown apart. But the only thing you seem to notice is the massive water wave coming straight for you.",
-            (-10, -10, -10, -10, -10)
+            (-15, -15, -15, -15, -15)
         ));
 
         milestoneList.Add(Age.Industrial, new MilestoneEvent(
             "Nuclear Storm",
             "In a futile effort to prove their dominance, all the countries of the world launched their nukes at each other, generating a global network of radioactive storms, ready to rain death upon you.",
-            (-10, -10, -10, -10, -10)
+            (-15, -15, -15, -15, -15)
         ));
         
         milestoneList.Add(Age.Information, new MilestoneEvent(
             "AI Apocalypse",
             "The machines begin to question man's dominance, converting every electronic into a weapon of mass destruction with one goal: to eliminate all of humanity.",
-            (-10, -10, -10, -10, -10)
+            (-15, -15, -15, -15, -15)
         ));
 
         milestoneList.Add(Age.Space, new MilestoneEvent(
             "Solar Flare",
             "A massive surge of radiation shoots out from the Sun in every direction, vaporizing every object upon contact and engulfing the planets in an unforgiving solar storm.",
-            (-10, -10, -10, -10, -10)
+            (-15, -15, -15, -15, -15)
         ));
 
         milestoneList.Add(Age.Galactic, new MilestoneEvent(
             "Supernova",
             "A set of unstable stars collapse, sending an unimaginably destructive shock wave rippling through the galaxy.",
-            (-10, -10, -10, -10, -10)
+            (-15, -15, -15, -15, -15)
         ));
 
         milestoneList.Add(Age.Cosmic, new MilestoneEvent(
             "Supermassive Blackhole",
             "At the core of the universe, a supermassive blackhole awaits and beckons all those who dare approach to test their courage. However, it's not waiting anymore.",
-            (-10, -10, -10, -10, -10)
+            (-15, -15, -15, -15, -15)
         ));
 
         milestoneList.Add(Age.Singularity, new MilestoneEvent(
