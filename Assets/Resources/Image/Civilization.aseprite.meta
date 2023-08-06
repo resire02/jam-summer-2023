@@ -119,14 +119,14 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Civilization
     originalName: 
-    pivot: {x: 0.34632036, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 2772
+      width: 1920
       height: 1080
     spriteID: 37c9423f87a1caf4e8abbe066aed81b6
     spriteBone: []
@@ -151,7 +151,7 @@ ScriptedImporter:
       cellRect:
         x: 0
         y: 0
-        width: 2772
+        width: 1920
         height: 1080
       spriteId: 37c9423f87a1caf4e8abbe066aed81b6
     linkedCells: []
