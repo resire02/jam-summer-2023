@@ -51,6 +51,13 @@ public class ImageLoader : MonoBehaviour
         SetScene(scene.bg, scene.fg);
     }
 
+    public void SetMilestoneScene(Age age)
+    {
+        (string bg, string fg) scene = ImageLoadedRef.GetMilestoneScene(age);
+
+        SetScene(scene.bg, scene.fg);
+    }
+
     //  sets the scene using the specified background and foreground respectively
     public void SetScene(string background, string foreground)
     {

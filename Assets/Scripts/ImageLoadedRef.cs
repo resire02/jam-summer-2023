@@ -6,6 +6,7 @@ public static class ImageLoadedRef
 {
     private static Dictionary<string, (float, float, float)> foregroundScale = new Dictionary<string, (float, float, float)>();
     private static Dictionary<Age, (string, string)> sceneData = new Dictionary<Age, (string, string)>();
+    private static Dictionary<Age, (string, string)> milestoneData = new Dictionary<Age, (string, string)>();
 
     private readonly static (float, float, float) SCALAR_DEFAULT = (1f, 0f, 0f);
     private readonly static (string, string) SCENE_DEFAULT = ("MilestonePlaceholder", "none");
@@ -15,6 +16,7 @@ public static class ImageLoadedRef
     {
         InitForegroundScalars();
         InitAgeSceneData();
+        InitMilestoneData();
     }
 
     private static void InitForegroundScalars()
@@ -44,6 +46,20 @@ public static class ImageLoadedRef
 
     }
 
+    private static void InitMilestoneData()
+    {
+        milestoneData.Add(Age.Prehistoric, ("PrehistoricMilestone", "none"));
+        milestoneData.Add(Age.Civilizing, ("CivilizingMilestone", "none"));
+        milestoneData.Add(Age.Medieval, ("MedievalMilestone", "none"));
+        milestoneData.Add(Age.Colonial, ("ColonialMilestone", "none"));
+        milestoneData.Add(Age.Industrial, ("IndustrialMilestone", "none"));
+        milestoneData.Add(Age.Information, ("InformationMilestone", "none"));
+        milestoneData.Add(Age.Space, ("SpaceMilestone", "none"));
+        milestoneData.Add(Age.Cosmic, ("CosmicMilestone", "none"));
+        milestoneData.Add(Age.Galactic, ("GalacticMilestone", "none"));
+        milestoneData.Add(Age.Singularity, ("SingularityMilestone", "none"));
+    }
+
     //  GETTER METHODS
 
     public static (float Scale, float XOffset, float YOffset) GetForegroundScalar(string name)
@@ -58,5 +74,12 @@ public static class ImageLoadedRef
         if(!sceneData.ContainsKey(age)) return SCENE_DEFAULT;
 
         return sceneData[age];
+    }
+
+    public static (string bg, string fg) GetMilestoneScene(Age age)
+    {
+        if(!milestoneData.ContainsKey(age)) return SCENE_DEFAULT;
+
+        return milestoneData[age];
     }
 }

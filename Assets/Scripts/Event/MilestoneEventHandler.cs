@@ -13,7 +13,7 @@ public class MilestoneEventHandler : MonoBehaviour
     [SerializeField] private UnityEvent eventHandlerCallback;
     [SerializeField] private UnityEvent<float> onGameEnd;
 
-    private Dictionary<Age, (string, string)> milestoneSceneData;
+    // private Dictionary<Age, (string, string)> milestoneSceneData;
     private ProgressionTracker progression;
     private ImageLoader imgLd;
     private MilestoneEvent milestoneEvent;
@@ -24,7 +24,7 @@ public class MilestoneEventHandler : MonoBehaviour
         imgLd = GetComponent<ImageLoader>();
         progression = GetComponent<ProgressionTracker>();   
         MilestoneEventList.Init();
-        PopulateMilestoneSceneData();
+        // PopulateMilestoneSceneData();
     }
 
     public void Reset()
@@ -32,26 +32,25 @@ public class MilestoneEventHandler : MonoBehaviour
         milestonePanel.SetActive(false);
     }
 
-    private void PopulateMilestoneSceneData()
-    {
-        milestoneSceneData = new Dictionary<Age, (string, string)>();
-        milestoneSceneData.Add(Age.Prehistoric, ("MilestonePlaceholder", "none"));
-    }
+    // private void PopulateMilestoneSceneData()
+    // {
+    //     milestoneSceneData = new Dictionary<Age, (string, string)>();
+    //     milestoneSceneData.Add(Age.Prehistoric, ("MilestonePlaceholder", "none"));
+    // }
 
     //  used to retrieve milestone scene data
-    private (string, string) GetMilestoneSceneData(Age age)
-    {
-        if(!milestoneSceneData.ContainsKey(age)) return ("MilestonePlaceholder", "none");
+    // private (string, string) GetMilestoneSceneData(Age age)
+    // {
+    //     if(!milestoneSceneData.ContainsKey(age)) return ("MilestonePlaceholder", "none");
 
-        return milestoneSceneData[age];
-    }
+    //     return milestoneSceneData[age];
+    // }
 
     //  used to setup the milestone scene
     public void TriggerMilestoneEvent(Age age)
     {
         //  set background and foreground scene
-        (string bg, string fg) scene = GetMilestoneSceneData(age);
-        imgLd.SetScene(scene.bg, scene.fg);
+        imgLd.SetMilestoneScene(age);
 
         //  toggle milestone panel
         milestonePanel.SetActive(true);
