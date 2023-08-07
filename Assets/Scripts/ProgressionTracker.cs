@@ -11,11 +11,11 @@ public class TextUpdateEvent : UnityEvent<float> {}
 public class ProgressionTracker : MonoBehaviour
 {
     /// Main Parameters
-    private float levelTechnology       = 0f;
-    private float levelStability        = 0f;
-    private float levelExploration      = 0f;
-    private float levelEnlightenment    = 0f;
-    private float levelAbundance        = 0f;
+    private float levelTechnology       = 100f;
+    private float levelStability        = 100f;
+    private float levelExploration      = 100f;
+    private float levelEnlightenment    = 100f;
+    private float levelAbundance        = 100f;
     private Age currentStage            = Age.Prehistoric;
     private float milestoneScalar       = 1f;
 
