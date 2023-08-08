@@ -2,30 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//  represents a really important event between eras
+[System.Serializable]
 public class MilestoneEvent
 {
-    private string title;
-    private string description;
-    private PointChange points;
+    /*
+    Note that JsonUtility does not support field get/set or readonly properties
+    So just pretend the fields are immutable
+    */
+    public string title;
+    public string description;
+    public Points points;
 
-    //  Constructors
+    public static readonly MilestoneEvent Default = new MilestoneEvent(
+        "Milestone Title",
+        "Milestone Description",
+        Points.Zero
+    );
 
-    public MilestoneEvent(string title, string desc, (int, int, int, int, int) points)
+    public MilestoneEvent(string t, string d, Points p)
     {
-        this.title = title;
-        this.description = desc;
-        this.points = new PointChange(points);
+        title = t;
+        description = d;
+        points = p;
     }
 
-    public MilestoneEvent(string title, string desc, PointChange points)
-    {
-        this.title = title;
-        this.description = desc;
-        this.points = points;
-    }
-
-    /// GETTER METHODS
-    public PointChange GetPointChange() { return points; }
-    public string GetTitle() { return title; }
-    public string GetDescription() { return description; }
+    public override string ToString() => title;
+    
 }

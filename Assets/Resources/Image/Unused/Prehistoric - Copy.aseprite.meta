@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b91e61a1e1ec9ec4784560fafdc329ce
+guid: 112df26f2a8c10c48852345481c3df0e
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Prehistoric
+  - name: Prehistoric - Copy
     originalName: 
     pivot: {x: 0.5, y: 0}
     alignment: 9
@@ -127,8 +127,8 @@ ScriptedImporter:
       x: 4
       y: 4
       width: 1920
-      height: 1080
-    spriteID: 28b5d702ac02a4f42b765e74ff94164c
+      height: 893
+    spriteID: 18d4605103a804844a510a07f4c3f441
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -140,20 +140,20 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -605481194
-    name: Prehistoric
+    guid: 1390522198
+    name: Prehistoric - Copy
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Prehistoric
+    - name: Prehistoric - Copy
       frameIndex: 0
       cellRect:
         x: 0
         y: 0
         width: 1920
-        height: 1080
-      spriteId: 28b5d702ac02a4f42b765e74ff94164c
+        height: 893
+      spriteId: 18d4605103a804844a510a07f4c3f441
     linkedCells: []
     parentIndex: -1
   platformSettings: []

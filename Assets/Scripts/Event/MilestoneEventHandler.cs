@@ -4,91 +4,84 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 
-[RequireComponent(typeof(RandomEventHandler))]
-public class MilestoneEventHandler : MonoBehaviour
+[RequireComponent(typeof(GameLogic))]
+public class MilestoneEventHandler : GameComponent
 {
-    [SerializeField] private GameObject milestonePanel;
-    [SerializeField] private TextMeshProUGUI title;
-    [SerializeField] private TextMeshProUGUI description;
-    [SerializeField] private UnityEvent eventHandlerCallback;
-    [SerializeField] private UnityEvent<float> onGameEnd;
+    [SerializeField] TextMeshProUGUI title;
+    [SerializeField] TextMeshProUGUI description;
+    [SerializeField] GameObject milestonePanel;
+    [SerializeField] VisualChange visuals;
+    [SerializeField] UnityEvent<Era,bool> loadSceneBackground;
 
-    // private Dictionary<Age, (string, string)> milestoneSceneData;
-    private ProgressionTracker progression;
-    private ImageLoader imgLd;
-    private MilestoneEvent milestoneEvent;
-    
+    GameLogic _gameLogic;
+    ProgressionTracker _progression;
+    MilestoneEvent _currentEvent;
+    Coroutine _event;
+    bool _acceptButtonPressed;
+
     private void Start()
     {
-        Reset();
-        imgLd = GetComponent<ImageLoader>();
-        progression = GetComponent<ProgressionTracker>();   
+        milestonePanel.SetActive(false);
+        _gameLogic = GetComponent<GameLogic>();
+        _progression = GetComponent<ProgressionTracker>();
+
         MilestoneEventList.Init();
-        // PopulateMilestoneSceneData();
     }
 
-    public void Reset()
+    public override void Reset()
     {
         milestonePanel.SetActive(false);
+        _currentEvent = null;
     }
 
-    // private void PopulateMilestoneSceneData()
-    // {
-    //     milestoneSceneData = new Dictionary<Age, (string, string)>();
-    //     milestoneSceneData.Add(Age.Prehistoric, ("MilestonePlaceholder", "none"));
-    // }
-
-    //  used to retrieve milestone scene data
-    // private (string, string) GetMilestoneSceneData(Age age)
-    // {
-    //     if(!milestoneSceneData.ContainsKey(age)) return ("MilestonePlaceholder", "none");
-
-    //     return milestoneSceneData[age];
-    // }
+    public void OnPlayerAccept()
+    {
+        _acceptButtonPressed = true;
+    }
 
     //  used to setup the milestone scene
-    public void TriggerMilestoneEvent(Age age)
+    public void StartMilestoneEvent(Era era)
     {
-        //  set background and foreground scene
-        imgLd.SetMilestoneScene(age);
+        //  draw milestone event
+        _currentEvent = MilestoneEventList.GetMilestoneEventFromEra(_progression.era);
 
-        //  toggle milestone panel
+        loadSceneBackground.Invoke(_progression.era, true);
+
+        //  update text
+        title.text = _currentEvent.title;
+        description.text = _currentEvent.description;
+
+        //  display milestone panel
         milestonePanel.SetActive(true);
-        milestoneEvent = MilestoneEventList.GetMilestoneEvent(age);
-        UpdateText();
+
+        //  handle milestone event
+        _event = StartCoroutine(TriggerMilestoneEvent());
     }
 
-    //  handles milestone event flow
-    public void HandleMilestone()
+    private IEnumerator TriggerMilestoneEvent()
     {
-        Debug.Log("Pressed Button");
+        //  wait for button press
+        _acceptButtonPressed = false;
+        yield return new WaitUntil(() => _acceptButtonPressed);
 
-        //  check if civilization survives
-        if(progression.SurvivesMilestone(milestoneEvent.GetPointChange()) && progression.GetTechnologicalStage() != Age.Singularity)
+        if(!_progression.SurvivesEvent(_currentEvent.points))
         {
-            progression.AdjustProgression(milestoneEvent.GetPointChange());
+            //  do game end
+            _gameLogic.OnGameEnd();
             
-            //  progress milestone
-            progression.AscendToNextMilestone();
-
-            //  handle event end
-            eventHandlerCallback.Invoke();
-
-            //  hide milestone panel after clicking
-            milestonePanel.SetActive(false);
-        }
-        else
-        {
-            //  display end panel
-            onGameEnd.Invoke(progression.CalculateScore());
+            yield break;
         }
 
+        visuals.TriggerAnimation(_currentEvent.points);
+
+        //  increment to next milestone
+        _progression.ToNextMilestone();
+
+        //  hide milestone panel
+        milestonePanel.SetActive(false);
+
+        //  end event
+        _gameLogic.OnEventEnd(true);
     }
 
-    //  updates milestone panel text
-    private void UpdateText()
-    {
-        title.text = milestoneEvent.GetTitle();
-        description.text = milestoneEvent.GetDescription();
-    }
 }

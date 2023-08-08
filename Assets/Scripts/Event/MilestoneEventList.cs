@@ -4,80 +4,81 @@ using UnityEngine;
 
 public static class MilestoneEventList
 {
-    private static Dictionary<Age,MilestoneEvent> milestoneList = new Dictionary<Age,MilestoneEvent>();
-    private readonly static MilestoneEvent DEFAULT = new MilestoneEvent("Milestone Title", "Milestone Description", (0, 0, 0, 0, 0));
+    static Dictionary<Era,MilestoneEvent> _milestoneList = new Dictionary<Era,MilestoneEvent>();
+
+    static bool _isInitalized = false;
 
     public static void Init()
     {
-        if(milestoneList.Count > 0) return;
+        if(_isInitalized) return;
 
-        //  TODO: add milestone events here
-        milestoneList.Add(Age.Prehistoric, new MilestoneEvent(
+        _milestoneList[Era.Prehistoric] = new MilestoneEvent(
             "Ice Age", 
             "You feel the air around you becoming colder. In fact, it's becoming too cold. The plants around you start to wither and the animals starting to hibernate. You immediately take shelter in your cave along with your tribe as an intense snow storm hits.", 
-            (-10, -10, -10, -10, -10)
-        ));
+            new Points(-10, -10, -10, -10, -10)
+        );
 
-        milestoneList.Add(Age.Civilizing, new MilestoneEvent(
+        _milestoneList[Era.Civilizing] = new MilestoneEvent(
             "Volcanic Eruption",
             "A nearby mountain suddenly implodes on itself and lava has begun to stream down the cliff, consuming all the animals and planets in its path of destruction. The earth beneath you starts to rumble violently, as if the heavens raged war on your land.",
-            (-10, -10, -10, -10, -10)
-        ));
+            new Points(-10, -10, -10, -10, -10)
+        );
 
-
-        milestoneList.Add(Age.Medieval, new MilestoneEvent(
+        _milestoneList[Era.Medieval] = new MilestoneEvent(
             "Plague of Death",
             "The towns surrounding the castle have grown bleak, the people withering away. A mysterious plague sweeps the land, the people drop as the years toil.",
-            (-15, -15, -15, -15, -15)
-        ));
+            new Points(-15, -15, -15, -15, -15)
+        );
 
-        milestoneList.Add(Age.Colonial, new MilestoneEvent(
+        _milestoneList[Era.Colonial] = new MilestoneEvent(
             "Hypercane",
             "A mighty breeze followed by a stronger breeze, the vegetation is uprooted as the towns are blown apart. But the only thing you seem to notice is the massive water wave coming straight for you.",
-            (-15, -15, -15, -15, -15)
-        ));
+            new Points(-15, -15, -15, -15, -15)
+        );
 
-        milestoneList.Add(Age.Industrial, new MilestoneEvent(
+        _milestoneList[Era.Industrial] = new MilestoneEvent(
             "Nuclear Storm",
             "In a futile effort to prove their dominance, all the countries of the world launched their nukes at each other, generating a global network of radioactive storms, ready to rain death upon you.",
-            (-15, -15, -15, -15, -15)
-        ));
+            new Points(-15, -15, -15, -15, -15)
+        );
         
-        milestoneList.Add(Age.Information, new MilestoneEvent(
+        _milestoneList[Era.Information] = new MilestoneEvent(
             "AI Apocalypse",
             "The machines begin to question man's dominance, converting every electronic into a weapon of mass destruction with one goal: to eliminate all of humanity.",
-            (-15, -15, -15, -15, -15)
-        ));
+            new Points(-15, -15, -15, -15, -15)
+        );
 
-        milestoneList.Add(Age.Space, new MilestoneEvent(
+        _milestoneList[Era.Space] = new MilestoneEvent(
             "Solar Flare",
             "A massive surge of radiation shoots out from the Sun in every direction, vaporizing every object upon contact and engulfing the planets in an unforgiving solar storm.",
-            (-15, -15, -15, -15, -15)
-        ));
+            new Points(-15, -15, -15, -15, -15)
+        );
 
-        milestoneList.Add(Age.Galactic, new MilestoneEvent(
+        _milestoneList[Era.Galactic] = new MilestoneEvent(
             "Supernova",
             "A set of unstable stars collapse, sending an unimaginably destructive shock wave rippling through the galaxy.",
-            (-15, -15, -15, -15, -15)
-        ));
+            new Points(-15, -15, -15, -15, -15)
+        );
 
-        milestoneList.Add(Age.Cosmic, new MilestoneEvent(
+        _milestoneList[Era.Cosmic] = new MilestoneEvent(
             "Supermassive Blackhole",
             "At the core of the universe, a supermassive blackhole awaits and beckons all those who dare approach to test their courage. However, it's not waiting anymore.",
-            (-15, -15, -15, -15, -15)
-        ));
+            new Points(-15, -15, -15, -15, -15)
+        );
 
-        milestoneList.Add(Age.Singularity, new MilestoneEvent(
+        _milestoneList[Era.Singularity] = new MilestoneEvent(
             "The Great Filter",
             "Those that begin must have an end.",
-            (-10, -10, -10, -10, -10)
-        ));
+            new Points(-10, -10, -10, -10, -10)
+        );
+
+        _isInitalized = true;
     }
 
-    public static MilestoneEvent GetMilestoneEvent(Age age)
+    public static MilestoneEvent GetMilestoneEventFromEra(Era era)
     {
-        if(!milestoneList.ContainsKey(age)) return DEFAULT;
-
-        return milestoneList[age];
+        if(!_milestoneList.ContainsKey(era))
+            return MilestoneEvent.Default;
+        return _milestoneList[era];
     }
 }

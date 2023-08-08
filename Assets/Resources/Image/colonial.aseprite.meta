@@ -117,7 +117,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: colonial
+  - name: Colonial
     originalName: 
     pivot: {x: 0.5, y: 0}
     alignment: 9
@@ -128,7 +128,7 @@ ScriptedImporter:
       y: 4
       width: 1920
       height: 1080
-    spriteID: c7173fbe529aa8f4485445fb2d393d1c
+    spriteID: b8e7b3774802e85458ea461d316ab262
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -140,20 +140,20 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -2072568479
-    name: colonial
+    guid: -1642881087
+    name: Colonial
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: colonial
+    - name: Colonial
       frameIndex: 0
       cellRect:
         x: 0
         y: 0
         width: 1920
         height: 1080
-      spriteId: c7173fbe529aa8f4485445fb2d393d1c
+      spriteId: b8e7b3774802e85458ea461d316ab262
     linkedCells: []
     parentIndex: -1
   platformSettings: []

@@ -2,122 +2,114 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
-[System.Serializable]
-public class UpdateTextEvent : UnityEvent<float> 
-{
+[RequireComponent(typeof(GameLogic))]
+public class RandomEventHandler : GameComponent
+{   
+    [SerializeField] TextMeshProUGUI title;
+    [SerializeField] TextMeshProUGUI description;
+    [SerializeField] GameObject decline;
+    [SerializeField] Animator animator;
+    [SerializeField] VisualChange visuals;
 
-}
+    GameLogic _gameLogic;
+    ProgressionTracker _progression;
+    RandomEvent _currentEvent;
+    Coroutine _accept;
+    bool _acceptButtonPressed;
 
-[System.Serializable]
-public class ImportantEvent : UnityEvent<Age>
-{
-
-}
-
-//  Handles when events occur
-public class RandomEventHandler : MonoBehaviour
-{
-    //  probability is calculated as 1 in eventProb
-    [SerializeField] private int eventProbability = 7;
-    [SerializeField] private float eventTriggerInterval = 10f;
-    [SerializeField] private float gameSpeed = 2f;
-    [SerializeField] public float startingYear = 0;
-    [SerializeField] private int eventQuota = 3;
-    [SerializeField] private float minimumYearThreshold = 30f;
-    
-    public UpdateTextEvent updateTimeText;
-    public ImportantEvent milestoneEvent;
-
-    private float eventTimer = 0f;
-    private bool eventIsOccurring = false;
-    private RandomEvent randomEvent;
-    private int eventCount = 0;
-    private ProgressionTracker progression;
-    [SerializeField] private AudioHandler request;
-    
     private void Start()
     {
-        updateTimeText.Invoke(startingYear);
-        randomEvent = GetComponent<RandomEvent>();
-        progression = GetComponent<ProgressionTracker>();
-        request.PlaySound("Game", true);
-        
-        //  this can silently fail
+        _gameLogic = GetComponent<GameLogic>();
+        _progression = GetComponent<ProgressionTracker>();
+
         RandomEventList.Init();
     }
 
-    public void Reset()
+    public override void Reset()
     {
-        eventIsOccurring = false;
-        eventCount = 0;
-        eventTimer = 0f;
-        startingYear = 0f;
-        updateTimeText.Invoke(startingYear);
+        animator.SetBool("EventBarVisible", false);
+        _currentEvent = null;
+
+        RandomEventList.RepopulateList();
     }
 
-    private void FixedUpdate()
+    public void OnPlayerAccept()
     {
-        if(eventIsOccurring) return;
-
-        eventTimer += Time.deltaTime * gameSpeed;
-        eventTimer = Mathf.Clamp(eventTimer, 0, eventTriggerInterval);
-
-        //  trigger event chance every n interval
-        if(eventTimer == eventTriggerInterval)
-        {
-            eventTimer = 0f;
-            startingYear += eventTriggerInterval;
-            updateTimeText.Invoke(startingYear);
-
-            if(startingYear >= minimumYearThreshold)
-            {
-                GambleEvent(progression.GetTechnologicalStage());
-            }
-        }
+        _acceptButtonPressed = true;
     }
 
-    //  gambles on event chance
-    public void GambleEvent(Age age)
+    public void OnPlayerDecline()
     {
-        if(Random.Range(0, eventProbability) != 0)
+        HandleEventEnd();
+    }
+
+    //  draws a random event from the event pool
+    public void StartRandomEvent(Era era)
+    {
+        //  draw random event
+        _currentEvent = RandomEventList.DrawRandomEventFromEra(_progression.era);
+
+        //  display event bar
+        animator.SetBool("EventBarVisible", true);
+
+        //  update event bar text
+        title.text = _currentEvent.title;
+        description.text = _currentEvent.description;
+
+        //  set no button active
+        if(!decline.activeInHierarchy) decline.SetActive(true);
+
+        //  do random event
+        _accept = StartCoroutine(TriggerRandomEvent());
+    }
+
+    //  handles random event flow
+    private IEnumerator TriggerRandomEvent()
+    {
+        //  wait for player press
+        _acceptButtonPressed = false;
+        yield return new WaitUntil(() => _acceptButtonPressed);
+
+        decline.SetActive(false);
+
+        //  calculate random event outcome
+        if(_currentEvent.IsSuccessful())
         {
-            //  maybe adjust point gain here?
-            if(startingYear % 50 == 0)
-            {
-                progression.AdjustProgression(new PointChange(5, 5, 5, 5, 5));
-            }
-            
-            return;
-        }
-        
-        if(eventCount == eventQuota)
-        {
-            eventCount = 0;
-            milestoneEvent.Invoke(age);            
+            title.text = _currentEvent.goodOutcome.title;
+            description.text = _currentEvent.goodOutcome.description;
+            _progression.AdjustProgression(_currentEvent.goodOutcome.points);
+            visuals.TriggerAnimation(_currentEvent.goodOutcome.points);
         }
         else
         {
-            eventCount++;
-            randomEvent.DetermineEvent(age);
+            title.text = _currentEvent.badOutcome.title;
+            description.text = _currentEvent.badOutcome.description;
+            _progression.AdjustProgression(_currentEvent.badOutcome.points);
+            visuals.TriggerAnimation(_currentEvent.badOutcome.points);
         }
 
-        eventIsOccurring = true;
+        //  wait for player press
+        _acceptButtonPressed = false;
+        yield return new WaitUntil(() => _acceptButtonPressed);
+
+        HandleEventEnd();
     }
 
-    //  handles end of event (connected by button callback)
-    public void OnEventEnd()
+    private void HandleEventEnd()
     {
-        eventIsOccurring = false;
+        //  end event status
+        _gameLogic.OnEventEnd(false);
+
+        //  hide event bar
+        animator.SetBool("EventBarVisible", false);
+
+        //  stop accept coroutine is ended early
+        StopCoroutine(_accept);
+
+        //  clear event
+        _currentEvent = null;
     }
 
-    public void OnMilestoneEventEnd()
-    {
-        eventIsOccurring = false;
-
-        //  TODO: end milestone event or something?
-    }
-
-    public bool IsEventHappening() { return eventIsOccurring; }
-    public float GetYear() { return startingYear; }
 }

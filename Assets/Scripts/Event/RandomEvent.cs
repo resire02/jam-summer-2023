@@ -1,112 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using TMPro;
 
+//  represents a random event that can happen
 [System.Serializable]
-public class PointChangeEvent : UnityEvent<PointChange> 
+public class RandomEvent
 {
+    /*
+    Note that JsonUtility does not support field get/set or readonly properties
+    So just pretend the fields are immutable
+    */
+    [System.Serializable]
+    public class EventOutcome
+    {
+        public string title;
+        public string description;
+        public Points points;
 
-}
+        public static readonly EventOutcome Default = new EventOutcome(
+            "Outcome Title",
+            "Description",
+            Points.Zero
+        );
 
-/// Displays and calculates the result of the RandomEvent
-[RequireComponent(typeof(RandomEventHandler))]
-public class RandomEvent : MonoBehaviour
-{
-    [SerializeField] private GameObject eventBar;
-    [SerializeField] private TextMeshProUGUI titleText;
-    [SerializeField] private TextMeshProUGUI description;
-    [SerializeField] private GameObject declineButton;
-    [SerializeField] private PointChangeEvent handleEvent;
-    [SerializeField] private AudioRequest request;
+        public EventOutcome(string t, string d, Points p)
+        {
+            title = t;
+            description = d;
+            points = p;
+        }
+    }
 
-    private SpriteGenerator generator;
-    private ChoiceEvent currentEvent;
-    private RandomEventHandler handler;
-    private Animator animator;
-    private bool outcomeOccurred;
+    //  class paramters
+    public string title;
+    public string description;
+    public EventOutcome goodOutcome;
+    public EventOutcome badOutcome;
+    public float probability;
+    public Era era;
+    public int id;
     
-    private void Start()
+    private static int _internalID = 0;
+
+    public static readonly RandomEvent Default = new RandomEvent(
+        Era.Prehistoric,
+        "Event Title",
+        "Event Description",
+        EventOutcome.Default,
+        EventOutcome.Default,
+        0.5f
+    );
+
+    //  constructors
+    public RandomEvent(Era e, string t, string d, EventOutcome good, EventOutcome bad, float prob)
     {
-        //  retrieve animator and handler
-        handler = GetComponent<RandomEventHandler>();
-        animator = eventBar.GetComponent<Animator>();
-        generator = GetComponent<SpriteGenerator>();
+        era = e;
+        title = t;
+        description = d;
+        goodOutcome = good;
+        badOutcome = bad;
+        probability = Mathf.Clamp(prob, 0f, 1f);
+        id = _internalID++;
     }
 
-    //  draws a random event from the event pool
-    public void DetermineEvent(Age age)
+    //  methods
+    public override string ToString() => $"{id}: {title}";
+
+    public bool IsSuccessful()
     {
-        //  select random event
-        currentEvent = RandomEventList.SelectRandomEvent(age);
-
-        //  play slider animation
-        animator.SetBool("EventBarVisible", true);
-
-        //  update event text
-        titleText.text = currentEvent.eventContext.title;
-        description.text = currentEvent.eventContext.description;
-
-        //  make decline button visible
-        declineButton.SetActive(true);
-
-        //  reset ok flag
-        outcomeOccurred = false;
-
-        Debug.Log($"Event Called: {currentEvent.eventContext.title}");
+        if(Random.Range(0f, 1f) <= probability)
+            return true;
+        return false;
     }
-
-    //  for accept button functionality
-    public void OnPlayerAccept()
-    {
-        if(!handler.IsEventHappening()) return;
-
-        if(outcomeOccurred)
-        {
-            currentEvent = null;
-            request.Invoke("Accept", false);
-            animator.SetBool("EventBarVisible", false);
-            handler.OnEventEnd();
-            return;
-        }
-
-        declineButton.SetActive(false);
-
-        if(currentEvent.GambleSuccess())
-        {
-            // Debug.Log("Sucessful Event Triggered");
-            request.Invoke("Accept", false);
-            titleText.text = "Success";
-            description.text = currentEvent.contextGood;
-            handleEvent.Invoke(currentEvent.resultGood);
-            generator.AddToScene(currentEvent.eventID);
-        }
-        else
-        {
-            // Debug.Log("Failure Event Triggered");
-            request.Invoke("Decline", false);
-            titleText.text = "Failure";
-            description.text = currentEvent.contextBad;
-            handleEvent.Invoke(currentEvent.resultBad);
-        }
-
-        outcomeOccurred = true;
-
-    }
-
-    //  for decline button functionality
-    public void OnPlayerDecline()
-    {
-        if(!handler.IsEventHappening()) return;
-
-        request.Invoke("Decline", false);
-
-        currentEvent = null;
-
-        animator.SetBool("EventBarVisible", false);
-
-        handler.OnEventEnd();
-    }
-
 }

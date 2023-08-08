@@ -8,80 +8,81 @@ using System.Text;
 //  Handles random selection of events
 public static class RandomEventList
 {
-    private static readonly string filepath = $"{Application.streamingAssetsPath}/RandomEvents.txt";
-    private static Dictionary<Age,List<ChoiceEvent>> eventList = new Dictionary<Age,List<ChoiceEvent>>();
-    private static readonly ChoiceEvent DEFAULT = new ChoiceEvent(
-        ("Event Title", "Event Description"), 
-        "Good Description", 
-        "Bad Description", 
-        (1, 1, 1, 1, 1), 
-        (-1, -1, -1, -1, -1), 
-        2,
-        -1
-    );
+    static readonly string _filepath = $"{Application.streamingAssetsPath}/RandomEvents.txt";
+    static Dictionary<Era,List<RandomEvent>> _eventList = new Dictionary<Era,List<RandomEvent>>();
+    static bool _isInitalized = false;
 
-    //  must be called before usingSelectRandomEvent!
     public static void Init()
     {
-        // Debug.Log(Application.streamingAssetsPath);
-
-        if(eventList.Count > 0) return;
+        if(_isInitalized) return;
 
         //  initalize all lists
-        eventList[Age.Prehistoric] = new List<ChoiceEvent>();
-        eventList[Age.Civilizing] = new List<ChoiceEvent>();
-        eventList[Age.Medieval] = new List<ChoiceEvent>();
-        eventList[Age.Colonial] = new List<ChoiceEvent>();
-        eventList[Age.Industrial] = new List<ChoiceEvent>();
-        eventList[Age.Information] = new List<ChoiceEvent>();
-        eventList[Age.Space] = new List<ChoiceEvent>();
-        eventList[Age.Galactic] = new List<ChoiceEvent>();
-        eventList[Age.Cosmic] = new List<ChoiceEvent>();
-        eventList[Age.Singularity] = new List<ChoiceEvent>();
+        foreach(Era era in Enum.GetValues(typeof(Era)))
+        {
+            _eventList[era] = new List<RandomEvent>();
+        }
 
-        InitializeAllEvents();
+        PopulateEventList();
+
+        _isInitalized = true;
+    }
+    
+    public static void RepopulateList()
+    {
+        if(!_isInitalized) throw new Exception("RandomEventList not initalized!");
+
+        foreach(Era era in _eventList.Keys)
+        {
+            _eventList[era].Clear();
+        }
+
+        PopulateEventList();
     }
 
-    //  returns a random ChoiceEvent from selected age and removes it from selection pool
-    public static ChoiceEvent SelectRandomEvent(Age age)
+    //  randomly picks and removes an event from the pool
+    public static RandomEvent DrawRandomEventFromEra(Era era)
     {
-        if(!eventList.ContainsKey(age)) return DEFAULT;
+        if(!_isInitalized) throw new Exception("RandomEventList not initalized!");
 
-        return SelectRandomEventFromList(eventList[age]);
+        if(_eventList[era].Count < 1) return RandomEvent.Default;
+
+        return DrawRandomEvent(_eventList[era], era);
     }
-
-    //  selects a random event and removes it from the pool
-    private static ChoiceEvent SelectRandomEventFromList(List<ChoiceEvent> list)
+    
+    //  choose and remove random event from list
+    private static RandomEvent DrawRandomEvent(List<RandomEvent> list, Era era)
     {
-        if(list.Count < 1) return DEFAULT;
         int index = UnityEngine.Random.Range(0, list.Count);
-        ChoiceEvent choice = list[index];
+        RandomEvent choice = list[index];
         list.RemoveAt(index);
-        // Debug.Log($"Length Modified: {list.Count}");
         return choice;
     }
 
-    //  populates eventList with events
-    public static void InitializeAllEvents()
+    //  populates event list from json
+    private static void PopulateEventList()
     {
-        foreach(Age age in eventList.Keys)
-        {
-            eventList[age].Clear();
-        }
+        //  create file if it doesn't exist
+        if(!File.Exists(_filepath)) File.Create(_filepath);
 
-        //  WARNING: YANDERE DEV LEVEL CODE UP AHEAD, PROCEED AT YOUR OWN RISK!
+        //  read filepath
+        int lineCount = 0;
 
-        foreach(string line in File.ReadLines(filepath))
+        foreach(string line in File.ReadLines(_filepath))
         {
-            if(line.Length <= 0 || line[0] != '{') continue;
-            ChoiceEventSerializable c = JsonUtility.FromJson<ChoiceEventSerializable>(line);
-            ChoiceEvent ce = c.DeserializeObject();
-            eventList[c.GetAge()].Add(ce);
-        }
+            lineCount++;
+            
+            if(line.Length == 0) continue;  //  ignore empty lines
+            string json = line.Trim();      //  remove whitespace characters
+            if(json[0] != '{') continue;    //  ignore non json lines
 
-        foreach(Age age in eventList.Keys)
-        {
-            Debug.Log($"{age} contains {eventList[age].Count} elements!");
+            try {
+                RandomEvent obj = JsonUtility.FromJson<RandomEvent>(json);  //  deserialize object
+                _eventList[obj.era].Add(obj);                               //  add to event list
+            } catch(KeyNotFoundException) {
+                Debug.LogError($"Line {lineCount} could not be deserialized!");
+                continue;
+            }
         }
     }
+
 }
