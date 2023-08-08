@@ -38,11 +38,13 @@ public class RandomEventHandler : GameComponent
     public void OnPlayerAccept()
     {
         _acceptButtonPressed = true;
+        AudioHandler.Player.PlaySFX("Accept");
     }
 
     public void OnPlayerDecline()
     {
         HandleEventEnd();
+        AudioHandler.Player.PlaySFX("Decline");
     }
 
     //  draws a random event from the event pool

@@ -29,6 +29,7 @@ public class GameEnd : GameComponent
     public void DisplayGameEnd(float score, float years)
     {
         gameEndPanel.SetActive(true);
+        AudioHandler.Player.PlayMusic("End");
 
         //  update game end text
         yearText.text = $"Years Lasted: {years.ToString("f0")}";

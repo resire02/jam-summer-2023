@@ -14,6 +14,11 @@ public class ResourceBarAnimation : MonoBehaviour
     {
         _visible = !_visible;
 
+        if(_visible)
+            AudioHandler.Player.PlaySFX("TabOpen");
+        else
+            AudioHandler.Player.PlaySFX("TabClosed");
+
         resourceBarAnimator.SetBool("ResourceBarVisible", _visible);
     }
 }

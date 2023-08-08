@@ -3,65 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
-public class AudioRequest : UnityEvent<string, bool>
-{
-
-}
-
 public class AudioHandler : MonoBehaviour
 {
-    public float globalVolume;
-    private Dictionary<string, AudioSource> audioIndex;
+    public static AudioHandler Player;
+    [SerializeField] AudioSource _music, _sfx;
+    AudioClip _musicActive, _sfxActive;
 
-    private void Start()
-    {   
-        audioIndex = new Dictionary<string, AudioSource>();
-    }
-
-    public void PlaySound(string sound, bool looped = false)
+    //  runs when script becomes active
+    private void Awake()
     {
-        CreateNewSource(sound);
-        PlayAudioClip(sound, looped);
-    }
-
-    public void StopSound(string sound)
-    {
-        if(audioIndex.ContainsKey(sound) && audioIndex[sound].isPlaying)
+        if(Player == null)
         {
-            audioIndex[sound].Stop();
+            Player = this;                  //  reinitalize global player if not initialized
+            DontDestroyOnLoad(gameObject);  //  keep object persistent between scene loads
+        }
+        else
+        {
+            Destroy(gameObject);    //  destroy object since player already exists
         }
     }
 
-    private bool CreateNewSource(string soundID)
+    public void PlaySFX(string name)
     {
-        if(audioIndex == null) Start();
-        
-        if(audioIndex.ContainsKey(soundID)) return false;
-
-        AudioSource source = transform.gameObject.AddComponent<AudioSource>() as AudioSource;
-
-        source.transform.SetParent(transform);
-
-        source.volume = globalVolume;
-
-        // Debug.Log("Created New Audio Source");
-
-        audioIndex.Add(soundID, source);
-
-        return true;
+        _sfxActive = LoadClipFromResources(name);
+        if(_sfxActive == null) return;
+        _sfx.clip = _sfxActive;
+        _sfx.Play();
     }
 
-    private void PlayAudioClip(string clip, bool looped)
+    public void PlayMusic(string name)
     {
-        if(audioIndex[clip].isPlaying)
-            audioIndex[clip].Stop();
-        
-        if(audioIndex[clip].clip == null)
-            audioIndex[clip].clip = (AudioClip) Resources.Load($"Audio/{clip}");
-        
-        audioIndex[clip].loop = looped;
-        audioIndex[clip].Play();
+        _musicActive = LoadClipFromResources(name);
+        if(_musicActive == null) return;
+        _music.clip = _musicActive;
+        _music.loop = true;
+        _music.Play();
+    }
+
+    private AudioClip LoadClipFromResources(string clip)
+    {
+        return Instantiate(Resources.Load<AudioClip>($"Audio/{clip}"));
     }
 
 }

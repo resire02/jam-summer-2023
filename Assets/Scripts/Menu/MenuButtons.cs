@@ -5,11 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
 {
-    [SerializeField] private AudioRequest request;
-
     public void StartGame()
     {
-        request.Invoke("MenuButton", false);
+        AudioHandler.Player.PlaySFX("MenuButton");
 
         Invoke(nameof(AppStart), 1f);
     }
@@ -18,7 +16,7 @@ public class MenuButtons : MonoBehaviour
     {
         Debug.Log("Game was Quitted!");
 
-        request.Invoke("MenuButton", false);
+        AudioHandler.Player.PlaySFX("MenuButton");
         
         Invoke(nameof(AppQuit), 1f);
     }

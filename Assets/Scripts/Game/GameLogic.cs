@@ -41,6 +41,7 @@ public class GameLogic : GameComponent
     {
         eventProbability = Mathf.Clamp(eventProbability, 0f, 1f);
         _progression = GetComponent<ProgressionTracker>();
+        AudioHandler.Player.PlayMusic("Game");
     }
 
     //  resets class to default state
@@ -50,6 +51,7 @@ public class GameLogic : GameComponent
         eventHappening = false;
         _eventCount = 0;
         startingYear = 0f;
+        AudioHandler.Player.PlayMusic("Game");
     }
 
     private void FixedUpdate()

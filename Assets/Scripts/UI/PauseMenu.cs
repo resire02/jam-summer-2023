@@ -29,10 +29,14 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 1.0f;
             pauseMenu.SetActive(false);
         }
+
+        AudioHandler.Player.PlaySFX("MenuButton");
     }
 
     public void ExitToMainMenu()
     {
+        AudioHandler.Player.PlaySFX("MenuButton");
+        
         SceneManager.LoadScene("Menu");
     }
 }
