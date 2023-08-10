@@ -53,6 +53,8 @@ public class RandomEventHandler : GameComponent
         //  draw random event
         _currentEvent = RandomEventList.DrawRandomEventFromEra(_progression.era);
 
+        // Debug.Log(JsonUtility.ToJson(_currentEvent));
+
         //  display event bar
         animator.SetBool("EventBarVisible", true);
 
